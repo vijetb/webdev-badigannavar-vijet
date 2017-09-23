@@ -6,7 +6,7 @@ body{
   padding-top: 65px;
 }
 
-.navbar {
+.user-navbar,.user-navbar-footer,.website-navbar-header,.website-navbar-footer{
   background-color: #0083c3;
 }
 
@@ -14,7 +14,10 @@ body{
   color: white;
 }
 
-.navbar-default .navbar-text a{
+.website-navbar-header  a,
+.website-navbar-footer  a,
+.user-navbar-header  a,
+.user-navbar-header a{
   color: white;
 }
 
