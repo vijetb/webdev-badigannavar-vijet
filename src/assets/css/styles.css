@@ -26,3 +26,7 @@ body{
 .website-list a{
   text-decoration: none;
 }
+
+.navbar-text a{
+  text-decoration: none;
+}
