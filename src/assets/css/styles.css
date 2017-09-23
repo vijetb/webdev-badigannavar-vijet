@@ -21,15 +21,19 @@ body{
   color: white;
 }
 
-.website-list{
+.website-list,.page-list{
   border: none;
   text-decoration: none;
 }
 
-.website-list a{
+.website-list a, .page-list a{
   text-decoration: none;
 }
 
 .navbar-text a{
   text-decoration: none;
+}
+
+.page-navbar-header a, .page-navbar-header .navbar-brand b{
+  color: #000000;
 }

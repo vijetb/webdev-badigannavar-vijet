@@ -17,10 +17,14 @@
   <link href="../../css/styles.css" rel="stylesheet"/>
 </head>
 <body>
-<!--header-->
-<nav class="navbar navbar-default navbar-fixed-top page-navbar-header">
+<!--&lt;!&ndash;Header&ndash;&gt;-->
 
-      <div class="container-fluid">
+<!--&lt;!&ndash;Header end&ndash;&gt;-->
+<!--Header-->
+<nav class="navbar navbar-default navbar-fixed-top page-navbar-header">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-4 col-md-4 col-lg-4 hidden-xs">
         <p class="navbar-text pull-left">
           <a href="page-list.html" class="glyphicon glyphicon-chevron-left"></a>
         </p>
@@ -30,12 +34,27 @@
         <p class="navbar-text pull-right">
           <a href="widget-chooser.html" class="glyphicon glyphicon-plus"></a>
         </p>
+      </div>
+      <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+        <p class="navbar-text pull-left hidden-sm hidden-md hidden-lg">
+          <a href="page-list.html" class="glyphicon glyphicon-chevron-left"></a>
+        </p>
+
+        <a class="navbar-brand" href="#"><b>Edit Page</b></a>
+
+        <p class="navbar-text pull-right">
+          <a href="widget-chooser.html" class="glyphicon glyphicon-ok"></a>
+        </p>
+      </div>
     </div>
+  </div>
 </nav>
 <!--Header end-->
 
+<div class="row">
   <div class="container-fluid">
 
+    <div class="hidden-xs col-sm-4 col-md-4 col-lg-4 pull-left">
       <ul class="list-group">
         <li class="list-group-item page-list">
           <a href="#">Blog Post</a>
@@ -54,8 +73,30 @@
           <a href="website-edit.html" class="glyphicon glyphicon-cog pull-right"></a>
         </li>
       </ul>
+    </div>
 
+    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 pull-right">
+      <form>
+        <div class="form-group">
+          <label for="pageName">Name</label>
+          <input type="text" class="form-control" id="pageName" placeholder="Page Name">
+        </div>
+      </form>
+      <form>
+        <div class="form-group">
+          <label for="pageTitle">Title</label>
+          <textarea id="pageTitle" class="form-control" name="textarea" rows="5" placeholder="Page Title"></textarea>
+        </div>
+      </form>
+      <form>
+        <div class="form-group">
+          <button class="btn btn-block btn-danger">Delete</button>
+        </div>
+      </form>
+    </div>
   </div>
+
+</div>
 
 <!-- Footer -->
 <nav class="navbar navbar-default navbar-fixed-bottom page-navbar-footer">
