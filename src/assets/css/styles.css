@@ -53,7 +53,8 @@ body{
   opacity: 0.5;
 }
 
-.widget-navbar-header .navbar-brand b{
+.widget-navbar-header .navbar-brand b,
+.page-navbar-header .navbar-brand b{
   color: #696969;
 }
 .color-black{
