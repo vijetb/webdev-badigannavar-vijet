@@ -7,7 +7,7 @@ body{
   padding-bottom: 50px;
 }
 
-.user-navbar,.user-navbar-footer,.website-navbar-header,.website-navbar-footer{
+.user-navbar-header,.user-navbar-footer,.website-navbar-header,.website-navbar-footer{
   background-color: #0083c3;
 }
 
@@ -18,7 +18,7 @@ body{
 .website-navbar-header  a,
 .website-navbar-footer  a,
 .user-navbar-header  a,
-.user-navbar-header a{
+.user-navbar-footer a{
   color: white;
 }
 
@@ -53,12 +53,19 @@ body{
   opacity: 0.5;
 }
 
+.widget-navbar-header .navbar-brand b{
+  color: #696969;
+}
 .color-black{
   color: #000000;
 }
 
 .color-blue{
   color: #0000FF;
+}
+
+.color-white{
+  color: #ffffff;
 }
 
 .widget-option{
