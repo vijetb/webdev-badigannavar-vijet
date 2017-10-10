@@ -1,0 +1,93 @@
+<!--Header-->
+<nav class="navbar navbar-default navbar-fixed-top website-navbar-header">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-4 col-md-4 col-lg-4 hidden-xs">
+        <p class="navbar-text pull-left">
+          <a href="/user/{{userId}}" class="glyphicon glyphicon-chevron-left toolbar-a-gly"></a>
+        </p>
+
+        <a class="navbar-brand" href="#"><b>Websites</b></a>
+
+        <p class="navbar-text pull-right">
+          <a routerLink="/user/{{userId}}/website/new" class="glyphicon glyphicon-plus"></a>
+        </p>
+      </div>
+      <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+        <p class="navbar-text pull-left hidden-sm hidden-md hidden-lg">
+          <a routerLink="/user/{{userId}}/website" class="glyphicon glyphicon-chevron-left"></a>
+        </p>
+
+        <a class="navbar-brand" href="#"><b>Edit Website</b></a>
+
+        <p class="navbar-text pull-right">
+          <a class="glyphicon glyphicon-ok" (click)="updateWebsite()"></a>
+        </p>
+      </div>
+    </div>
+  </div>
+</nav>
+<!--Header end-->
+
+<div class="row">
+  <div class="container-fluid">
+
+    <div class="hidden-xs col-sm-4 col-md-4 col-lg-4 pull-left">
+      <ul class="list-group">
+        <div *ngFor="let website of websiteList">
+          <li class="list-group-item website-list">
+            <a href="../page/page-list.html">{{website.name}}</a>
+            <a routerLink="/user/{{userId}}/website/{{website._id}}" class="glyphicon glyphicon-cog pull-right"></a>
+          </li>
+        </div>
+      </ul>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 pull-right">
+      <div *ngIf="errorMsg" class="alert alert-danger" role="alert">{{errorMsg}}</div>
+      <form>
+        <div class="form-group">
+          <label for="websiteName">Website Name</label>
+          <input type="text"
+                 class="form-control"
+                 id="websiteName"
+                 name="websiteName"
+                 placeholder="Alice"
+                 value="{{updatedName}}"
+                 [(ngModel)]="updatedName"
+                 >
+        </div>
+      </form>
+      <form>
+        <div class="form-group">
+          <label for="websiteDesc">Website Description</label>
+          <textarea id="websiteDesc"
+                    class="form-control"
+                    name="textarea"
+                    rows="5"
+                    value="{{updatedDesc}}"
+                    [(ngModel)]="updatedDesc"
+                    placeholder="Description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book
+          </textarea>
+        </div>
+      </form>
+      <form>
+        <div class="form-group">
+          <button class="btn btn-block btn-danger" (click)="deleteWebsite()">Delete</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<nav class="navbar navbar-default navbar-fixed-bottom website-navbar-footer">
+  <div class="container-fluid">
+    <p class="navbar-text pull-right" id="f">
+      <a routerLink="/user/{{userId}}">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+    </p>
+  </div>
+</nav>
+<!--footer end-->

@@ -12,6 +12,10 @@ import { LoginComponent } from './components/user/login/login.component';
 import { UserService } from './services/user.service.client';
 import { ProfileComponent } from './components/user/profile/profile.component';
 import { RegisterComponent } from './components/user/register/register.component';
+import { WebsiteListComponent } from './components/website/website-list/website-list.component';
+import { WebsiteEditComponent } from './components/website/website-edit/website-edit.component';
+import { WebsiteNewComponent } from './components/website/website-new/website-new.component';
+import { WebsiteService } from './services/website.service.client';
 
 @NgModule({
   // Declare components here
@@ -21,7 +25,10 @@ import { RegisterComponent } from './components/user/register/register.component
     TestComponent,
     LoginComponent,
     ProfileComponent,
-    RegisterComponent
+    RegisterComponent,
+    WebsiteListComponent,
+    WebsiteEditComponent,
+    WebsiteNewComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +37,7 @@ import { RegisterComponent } from './components/user/register/register.component
     Routing
   ],
   // Client Side services here
-  providers: [ TestService, UserService],
+  providers: [ TestService, UserService, WebsiteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

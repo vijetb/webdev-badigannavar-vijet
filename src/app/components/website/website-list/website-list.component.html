@@ -1,0 +1,38 @@
+<nav class="navbar navbar-default navbar-fixed-top website-navbar-header">
+  <div class="container-fluid">
+
+    <p class="navbar-text pull-left">
+      <a routerLink="/user/{{userId}}" class="glyphicon glyphicon-chevron-left"></a>
+    </p>
+
+    <a class="navbar-brand" href="#"><b>Websites</b></a>
+
+    <p class="navbar-text pull-right">
+      <a routerLink="/user/{{userId}}/website/new" class="glyphicon glyphicon-plus"></a>
+    </p>
+
+  </div>
+</nav>
+<!--Header end-->
+<div class="container-fluid">
+  <ul class="list-group">
+    <div *ngFor="let website of websiteList">
+      <li class="list-group-item website-list">
+        <a href="../page/page-list.html">{{website.name}}</a>
+        <a routerLink="/user/{{userId}}/website/{{website._id}}" class="glyphicon glyphicon-cog pull-right"></a>
+      </li>
+    </div>
+  </ul>
+</div>
+
+
+<!-- Footer -->
+<nav class="navbar navbar-default navbar-fixed-bottom website-navbar-footer">
+  <div class="container-fluid">
+    <p class="navbar-text pull-right" id="f">
+      <a routerLink="/user/{{userId}}">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+    </p>
+  </div>
+</nav>
