@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service.client';
 import { User } from '../../../model/user.model.client';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -10,16 +11,20 @@ import { User } from '../../../model/user.model.client';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  @ViewChild('f') loginForm: NgForm;
+
   username: String;
   password: String;
   loginError: String;
-  flag: boolean;
   constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit() {}
 
-  validate(username: String, password: String) {
-     const user: User = this.userService.findUserByCredentials(username, password);
+  login() {
+    this.loginError = null;
+    this.username = this.loginForm.value.username;
+    this.password = this.loginForm.value.password;
+     const user: User = this.userService.findUserByCredentials(this.username, this.password);
      if (user) {
        this.router.navigate(['/user', user._id]);
      }else {
@@ -27,7 +32,4 @@ export class LoginComponent implements OnInit {
      }
   }
 
-  registration() {
-    this.router.navigate(['/register']);
-  }
 }

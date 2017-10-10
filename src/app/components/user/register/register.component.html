@@ -1,21 +1,43 @@
 <div class="container">
   <h1>Register</h1>
   <div [hidden]="!registrationError" class="alert alert-danger" role="alert">{{registrationError}}</div>
+  <form #f="ngForm">
   <input placeholder="username"
          type="text"
+         name="username"
+         required
+         #username1="ngModel"
          class="form-control"
          [(ngModel)]="username" />
+    <div *ngIf="username1.invalid && (username1.dirty || username1.touched)"
+         class="alert alert-danger">
+          Username cannot be empty
+    </div>
   <input placeholder="password"
          type="password"
+         name="password"
+         #password1="ngModel"
+         required
          class="form-control"
          [(ngModel)]="password"/>
+    <div *ngIf="password1.invalid && (password1.dirty || password1.touched)"
+         class="alert alert-danger">
+      Password cannot be empty
+    </div>
   <input placeholder="verify password"
          type="password"
+         name="passwordDuplicated"
+         #passwordDuplicated1="ngModel"
          class="form-control"
+         required
          [(ngModel)]="passwordDuplicated"/>
-  <a class="btn btn-primary btn-block"
-     (click)="registerUser(username, password, passwordDuplicated)">Register</a>
+    <div *ngIf="passwordDuplicated1.invalid && (passwordDuplicated1.dirty || passwordDuplicated1.touched)"
+         class="alert alert-danger">
+         Password cannot be empty
+    </div>
+  <button class="btn btn-primary btn-block"
+     (click)="registerUser(username, password, passwordDuplicated) " [disabled]="!f.valid">Register</button>
   <a class="btn btn-danger btn-block"
      routerLink="/login">Cancel</a>
-
+  </form>
 </div>

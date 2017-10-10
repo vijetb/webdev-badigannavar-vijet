@@ -13,6 +13,7 @@ export class ProfileComponent implements OnInit {
 
   userId: String;
   user: User;
+  updateStatus: boolean;
   constructor(private userService: UserService, private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
@@ -28,7 +29,7 @@ export class ProfileComponent implements OnInit {
   }
 
   updateUserInfo(user: User) {
-    this.userService.updateUser(this.userId, this.user);
+    this.updateStatus = this.userService.updateUser(this.userId, this.user);
   }
 
 

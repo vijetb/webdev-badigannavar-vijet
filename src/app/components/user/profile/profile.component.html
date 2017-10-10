@@ -20,38 +20,52 @@
 
 
 <div class="container">
+  <div *ngIf="updateStatus" class="alert alert-success" role="alert">Profile Updated successfully.</div>
   <form>
     <div class="form-group">
       <label for="username">Username</label>
-      <input type="text" class="form-control" id="username" name="username" placeholder="Alice" [(ngModel)] = "user.userName" value="{{user.userName}}">
+      <input
+        type="text"
+        #username="ngModel"
+        class="form-control"
+        id="username"
+        name="username"
+        required
+        placeholder="Alice"
+        [(ngModel)] = "user.userName"
+        value="{{user.userName}}">
     </div>
-  </form>
+    <div *ngIf="username.invalid && (username.dirty || username.touched)"
+         class="alert alert-danger">
+      Username cannot be empty
+    </div>
 
-  <form>
     <div class="form-group">
       <label for="email">Email address</label>
-      <input type="email" class="form-control" id="email" name="email" placeholder="alice.wonderland@unicorn.com" [(ngModel)] = "user.email" value="{{user.email}}">
+      <input type="email" #email="ngModel" required class="form-control" id="email" name="email" placeholder="alice.wonderland@unicorn.com" [(ngModel)] = "user.email" value="{{user.email}}">
     </div>
-  </form>
 
-  <form>
+
+    <div *ngIf="email.invalid && (email.dirty || email.touched)"
+         class="alert alert-danger">
+      Email cannot be empty
+    </div>
+
     <div class="form-group">
       <label for="first-name">First Name</label>
       <input type="text" class="form-control" id="first-name" name="first-name" [(ngModel)] = "user.firstName" value="{{user.firstName}}">
     </div>
-  </form>
 
-  <form>
     <div class="form-group">
       <label for="last-name">Last Name</label>
       <input type="text" class="form-control" id="last-name" name="last-name" placeholder="Wonderland" [(ngModel)] = "user.lastName" value="{{user.lastName}}">
     </div>
-  </form>
-  <a class="btn btn-primary btn-block"
-     href="../website/website-list.html">Websites</a>
-  <a class="btn btn-danger btn-block "
-     (click)="logout()" >Logout</a>
 
+  <button class="btn btn-primary btn-block"
+     href="../website/website-list.html">Websites</button>
+  <button class="btn btn-danger btn-block "
+     routerLink="/logout">Logout</button>
+  </form>
 </div>
 
 <!-- Footer -->
