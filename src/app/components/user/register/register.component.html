@@ -1,0 +1,21 @@
+<div class="container">
+  <h1>Register</h1>
+  <div [hidden]="!registrationError" class="alert alert-danger" role="alert">{{registrationError}}</div>
+  <input placeholder="username"
+         type="text"
+         class="form-control"
+         [(ngModel)]="username" />
+  <input placeholder="password"
+         type="password"
+         class="form-control"
+         [(ngModel)]="password"/>
+  <input placeholder="verify password"
+         type="password"
+         class="form-control"
+         [(ngModel)]="passwordDuplicated"/>
+  <a class="btn btn-primary btn-block"
+     (click)="registerUser(username, password, passwordDuplicated)">Register</a>
+  <a class="btn btn-danger btn-block"
+     routerLink="/login">Cancel</a>
+
+</div>

@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>Login</h1>
+  <div [hidden]="!loginError" class="alert alert-danger" role="alert">{{loginError}}</div>
+  <input placeholder="username"
+         type="text"
+         class="form-control"
+          [(ngModel)]="username"/>
+  <input placeholder="password"
+         type="password"
+         class="form-control"
+         [(ngModel)]="password"/>
+
+  <a class="btn btn-primary btn-block" (click)="validate(username,password)">Login</a>
+  <a class="btn btn-success btn-block" (click)="registration()">Register</a>
+
+</div>
