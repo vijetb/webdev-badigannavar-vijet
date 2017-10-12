@@ -1,0 +1,73 @@
+<!--Header-->
+<nav class="navbar navbar-default navbar-fixed-top widget-navbar-header">
+  <div class="container-fluid">
+
+    <p class="navbar-text pull-left">
+      <a (click)="goBack()" class="glyphicon glyphicon-chevron-left"></a>
+    </p>
+
+    <a class="navbar-brand" href="#" [hidden]="!isNewWidget"><b>Widget New</b></a>
+    <a class="navbar-brand" href="#" [hidden]="isNewWidget"><b>Widget Edit</b></a>
+
+    <p class="navbar-text pull-right">
+      <a (click)="updateWidget()" class="glyphicon glyphicon-ok"></a>
+    </p>
+  </div>
+</nav>
+<!--Header end-->
+<div class="container-fluid">
+  <div *ngIf="errorMsg" class="alert alert-danger" role="alert">{{errorMsg}}</div>
+
+  <form>
+    <div class="form-group">
+      <label for="widgetName">Name</label>
+      <input type="text" class="form-control" id="widgetName" placeholder="Alice" value="Sports">
+    </div>
+  </form>
+  <form>
+    <div class="form-group">
+      <label for="widgetText">Text</label>
+      <input type="text" class="form-control" id="widgetText" placeholder="Alice" value="Sports image">
+    </div>
+  </form>
+  <form>
+    <div class="form-group">
+      <label for="widgetUrl">URL</label>
+      <input type="text" class="form-control" id="widgetUrl" name="widgetUrl" placeholder="Alice" [(ngModel)]="url">
+    </div>
+  </form>
+  <form>
+    <div class="form-group">
+      <label for="widgetWidth">Width</label>
+      <input type="text" class="form-control" id="widgetWidth" name="widgetWidth" placeholder="0-100%" [(ngModel)]="width">
+    </div>
+  </form>
+  <form>
+    <div class="form-group">
+      <label for="widgetUpload">Upload</label>
+      <input type="file" id="widgetUpload">
+    </div>
+  </form>
+  <form>
+    <div class="form-group">
+      <button class="btn btn-block btn-primary">Upload Image</button>
+    </div>
+  </form>
+  <form>
+    <div class="form-group">
+      <button (click)="deleteWidget()" class="btn btn-block btn-danger">Delete</button>
+    </div>
+  </form>
+</div>
+
+<!-- Footer -->
+<nav class="navbar navbar-default navbar-fixed-bottom widget-navbar-footer">
+  <div class="container-fluid">
+    <p class="navbar-text pull-right">
+      <a routerLink="/user/{{userId}}">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+    </p>
+  </div>
+</nav>
+<!--footer end-->

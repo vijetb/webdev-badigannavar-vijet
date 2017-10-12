@@ -36,8 +36,10 @@
       <ul class="list-group">
         <div *ngFor="let website of websiteList">
           <li class="list-group-item website-list">
-            <a href="../page/page-list.html">{{website.name}}</a>
+            <a routerLink="/user/{{userId}}/website/{{website._id}}/page">{{website.name}}</a>
             <a routerLink="/user/{{userId}}/website/{{website._id}}" class="glyphicon glyphicon-cog pull-right"></a>
+            <!--<a routerLink="/login" class="glyphicon glyphicon-cog pull-right"></a>-->
+
           </li>
         </div>
       </ul>

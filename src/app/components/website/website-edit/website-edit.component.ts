@@ -22,11 +22,12 @@ export class WebsiteEditComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.userId = params['uid'];
       this.websiteId = params['wid'];
+
+      this.websiteList = this.websiteService.findWebsitesByUser(this.userId);
+      this.updatingWebsite = this.websiteService.findWebsiteById(this.websiteId);
+      this.updatedName = this.updatingWebsite.name;
+      this.updatedDesc = this.updatingWebsite.description;
     });
-    this.websiteList = this.websiteService.findWebsitesByUser(this.userId);
-    this.updatingWebsite = this.websiteService.findWebsiteById(this.websiteId);
-    this.updatedName = this.updatingWebsite.name;
-    this.updatedDesc = this.updatingWebsite.description;
   }
 
   deleteWebsite() {
@@ -35,8 +36,6 @@ export class WebsiteEditComponent implements OnInit {
   }
 
   updateWebsite() {
-    console.log(this.updatedName);
-    console.log(this.updatedDesc);
     if (this.updatedName === '' && this.updatedDesc === '' || this.updatedName === '') {
       this.errorMsg = 'Website name cannot be null';
       return;

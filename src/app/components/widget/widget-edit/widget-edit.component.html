@@ -1,0 +1,19 @@
+<div [ngSwitch]="widgetId">
+
+  <div *ngSwitchCase='1'>
+    <app-widget-header></app-widget-header>
+  </div>
+
+  <div *ngSwitchCase='2'>
+    <app-widget-image></app-widget-image>
+  </div>
+
+  <div *ngSwitchCase='3'>
+    <app-widget-youtube></app-widget-youtube>
+  </div>
+
+  <div *ngSwitchCase='4'>
+    <app-widget-html></app-widget-html>
+  </div>
+
+</div>

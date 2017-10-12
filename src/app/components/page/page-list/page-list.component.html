@@ -1,0 +1,39 @@
+<!--header-->
+<nav class="navbar navbar-default navbar-fixed-top page-navbar-header">
+
+  <div class="container-fluid">
+    <p class="navbar-text pull-left">
+      <a routerLink="/user/{{userId}}/website" class="glyphicon glyphicon-chevron-left"></a>
+    </p>
+
+    <a class="navbar-brand" href="#"><b>Pages</b></a>
+
+    <p class="navbar-text pull-right">
+      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/new" class="glyphicon glyphicon-plus"></a>
+    </p>
+  </div>
+</nav>
+<!--Header end-->
+
+<div class="container-fluid">
+  <ul class="list-group">
+    <div *ngFor="let page of pageList">
+      <li class="list-group-item page-list">
+        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{page._id}}/widget">{{page.name}}</a>
+        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{page._id}}" class="glyphicon glyphicon-cog pull-right"></a>
+      </li>
+    </div>
+  </ul>
+</div>
+
+<!-- Footer -->
+<nav class="navbar navbar-default navbar-fixed-bottom page-navbar-footer">
+  <div class="container-fluid">
+    <p class="navbar-text pull-right">
+      <a routerLink="/user/{{userId}}">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+    </p>
+  </div>
+</nav>
+<!--footer end-->

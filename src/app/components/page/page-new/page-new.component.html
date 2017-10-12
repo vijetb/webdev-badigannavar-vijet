@@ -1,0 +1,74 @@
+<nav class="navbar navbar-default navbar-fixed-top page-navbar-header">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-4 col-md-4 col-lg-4 hidden-xs">
+        <p class="navbar-text pull-left">
+          <a href="/user/{{userId}}/website/{{websiteId}}/page" class="glyphicon glyphicon-chevron-left"></a>
+        </p>
+
+        <a class="navbar-brand" href="#"><b>Pages</b></a>
+
+        <p class="navbar-text pull-right">
+          <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/new" class="glyphicon glyphicon-plus"></a>
+        </p>
+      </div>
+      <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+        <p class="navbar-text pull-left hidden-sm hidden-md hidden-lg">
+          <a href="page-list.html" class="glyphicon glyphicon-chevron-left"></a>
+        </p>
+
+        <a class="navbar-brand" href="#"><b>New Page</b></a>
+
+        <p class="navbar-text pull-right">
+          <a (click)="addPage()" class="glyphicon glyphicon-ok"></a>
+        </p>
+      </div>
+    </div>
+  </div>
+</nav>
+<!--Header end-->
+
+<div class="row">
+  <div class="container-fluid">
+
+    <div class="hidden-xs col-sm-4 col-md-4 col-lg-4 pull-left">
+      <ul class="list-group">
+        <div *ngFor="let page of pageList">
+          <li class="list-group-item page-list">
+            <a href="../widget/widget-list.html">{{page.name}}</a>
+            <a href="page-edit.html" class="glyphicon glyphicon-cog pull-right"></a>
+          </li>
+        </div>
+      </ul>
+    </div>
+
+    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 pull-right">
+      <div *ngIf="errorMsg" class="alert alert-danger" role="alert">{{errorMsg}}</div>
+      <form>
+        <div class="form-group">
+          <label for="pageName">Name</label>
+          <input type="text" class="form-control" name="pageName" id="pageName" placeholder="Page Name" [(ngModel)]="pageName">
+        </div>
+      </form>
+      <form>
+        <div class="form-group">
+          <label for="pageTitle">Title</label>
+          <input type="text" class="form-control" name="pageTitle" id="pageTitle" placeholder="Page Title" [(ngModel)]="pageTitle">
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<nav class="navbar navbar-default navbar-fixed-bottom page-navbar-footer">
+  <div class="container-fluid">
+    <p class="navbar-text pull-right">
+      <a href="../user/profile.html">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+    </p>
+  </div>
+</nav>
+<!--footer end-->

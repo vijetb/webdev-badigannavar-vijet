@@ -1,0 +1,123 @@
+<!--Header-->
+<nav class="navbar navbar-default navbar-fixed-top widget-navbar-header">
+  <div class="container-fluid">
+
+    <p class="navbar-text pull-left">
+      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page" class="glyphicon glyphicon-chevron-left"></a>
+    </p>
+
+    <a class="navbar-brand" href="#"><b>Widgets</b></a>
+
+    <p class="navbar-text pull-right">
+      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new" class="glyphicon glyphicon-plus"></a>
+    </p>
+
+  </div>
+</nav>
+<!--Header end-->
+<div class="container-fluid">
+  <div class="row">
+    <ul class="list-group">
+      <div *ngFor="let widget of widgetList">
+
+        <div [ngSwitch]="widget.widgetType">
+
+            <div *ngSwitchCase="'HEADING'">
+              <li class="list-group-item widget-list">
+                <div class="widget-container">
+                  <div [ngSwitch]="widget['size']">
+                    <div *ngSwitchCase="1">
+                      <h1>{{widget['text']}}</h1>
+                    </div>
+                    <div *ngSwitchCase="2">
+                      <h2>{{widget['text']}}</h2>
+                    </div>
+                    <div *ngSwitchCase="3">
+                      <h3>{{widget['text']}}</h3>
+                    </div>
+                    <div *ngSwitchCase="4">
+                      <h4>{{widget['text']}}</h4>
+                    </div>
+                    <div *ngSwitchCase="5">
+                      <h5>{{widget['text']}}</h5>
+                    </div>
+                    <div *ngSwitchCase="6">
+                      <h6>{{widget['text']}}</h6>
+                    </div>
+                  </div>
+                  <div class="widget-options">
+                    <a class="glyphicon glyphicon-align-justify widget-option pull-right color-black"></a>
+                    <a class="glyphicon glyphicon-cog pull-right widget-option color-blue"
+                       routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/1/{{widget['_id']}}"></a>
+                  </div>
+                </div>
+              </li>
+            </div>
+
+            <div *ngSwitchCase="'IMAGE'">
+              <div class="widget-container">
+                <img class="image widget-image" [src]="widget['url']" [style.width]="widget['width']">
+                <div class="widget-options">
+                  <a class="glyphicon glyphicon-align-justify widget-option pull-right color-black"></a>
+                  <a class="glyphicon glyphicon-cog pull-right widget-option color-blue"
+                     routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/2/{{widget['_id']}}"></a>
+                </div>
+              </div>
+            </div>
+
+            <div *ngSwitchCase="'YOUTUBE'">
+              <li class="list-group-item widget-list">
+                <div class="widget-container">
+                  <div class="widget-options">
+                    <a class="glyphicon glyphicon-align-justify widget-option pull-right color-black"></a>
+                    <a class="glyphicon glyphicon-cog pull-right widget-option color-blue"
+                       routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/3/{{widget['_id']}}"></a>
+                  </div>
+                  <iframe class="video-frame" [style.width]="widget['width']" [src]="getSanitizedURL(widget['url'])" frameborder="0" allowfullscreen></iframe>
+                </div>
+              </li>
+            </div>
+
+            <div *ngSwitchCase="'HTML'">
+              <li class="list-group-item widget-list">
+                <div class="widget-container">
+                  <div class="widget-options">
+                    <a class="glyphicon glyphicon-align-justify widget-option pull-right color-black"></a>
+                    <a class="glyphicon glyphicon-cog pull-right widget-option color-blue"
+                       routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/4/{{widget['_id']}}"></a>
+                  </div>
+                  <div [innerHtml]="widget['text']"></div>
+                </div>
+              </li>
+            </div>
+        </div>
+
+      </div>
+    </ul>
+  </div>
+</div>
+
+
+<!-- Footer -->
+<nav class="navbar navbar-default navbar-fixed-bottom widget-navbar-footer">
+  <div class="container-fluid">
+    <p class="navbar-text pull-left">
+      <a href="profile.html">
+        <span class="glyphicon glyphicon-play gly-black"></span>
+      </a>
+    </p>
+
+    <p class="navbar-text pull-left">
+      <a href="profile.html">
+        <span class="glyphicon glyphicon-eye-open gly-black"></span>
+      </a>
+    </p>
+
+    <p class="navbar-text pull-right">
+      <a routerLink="/user/{{userId}}">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+    </p>
+  </div>
+</nav>
+<!--footer end-->

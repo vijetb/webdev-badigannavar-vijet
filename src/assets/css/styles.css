@@ -83,12 +83,11 @@ body{
 }
 
 .video-frame {
-  width: 100%;
   padding: -10px;
 }
 
 .widget-image{
-  width: 100%;
+  width: 30%;
 }
 
 .widget-navbar-footer .glyphicon-play,.widget-navbar-footer .glyphicon-eye-open {
