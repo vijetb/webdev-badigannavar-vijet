@@ -9,12 +9,12 @@
         <a class="navbar-brand" href="#"><b>Pages</b></a>
 
         <p class="navbar-text pull-right">
-          <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/new" (click)="updatePage()" class="glyphicon glyphicon-plus"></a>
+          <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/new" class="glyphicon glyphicon-plus"></a>
         </p>
       </div>
       <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
         <p class="navbar-text pull-left hidden-sm hidden-md hidden-lg">
-          <a href="page-list.html" class="glyphicon glyphicon-chevron-left"></a>
+          <a routerLink="/user/{{userId}}/website/{{websiteId}}/page"class="glyphicon glyphicon-chevron-left"></a>
         </p>
 
         <a class="navbar-brand" href="#"><b>Edit Page</b></a>
@@ -35,7 +35,7 @@
       <ul class="list-group">
         <div *ngFor="let page of pageList">
           <li class="list-group-item page-list">
-            <a href="../widget/widget-list.html">{{page.name}}</a>
+            <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{page._id}}/widget">{{page.name}}</a>
             <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{page._id}}" class="glyphicon glyphicon-cog pull-right"></a>
           </li>
         </div>
