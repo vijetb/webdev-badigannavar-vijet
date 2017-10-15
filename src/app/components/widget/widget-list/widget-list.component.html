@@ -55,6 +55,7 @@
             </div>
 
             <div *ngSwitchCase="'IMAGE'">
+              <li class="list-group-item widget-list">
               <div class="widget-container">
                 <img class="image widget-image" [src]="widget['url']" [style.width]="widget['width'] + '%'">
                 <div class="widget-options">
@@ -63,6 +64,7 @@
                      routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/2/{{widget['_id']}}"></a>
                 </div>
               </div>
+              </li>
             </div>
 
             <div *ngSwitchCase="'YOUTUBE'">

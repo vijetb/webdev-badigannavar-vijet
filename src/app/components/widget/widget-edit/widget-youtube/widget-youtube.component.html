@@ -21,13 +21,13 @@
   <form>
     <div class="form-group">
       <label for="widgetName">Name</label>
-      <input type="text" class="form-control" id="widgetName" placeholder="Alice" value="youtube">
+      <input type="text" class="form-control" name="widgetName" id="widgetName" placeholder="Alice" [(ngModel)]="name">
     </div>
   </form>
   <form>
     <div class="form-group">
       <label for="widgetText">Text</label>
-      <input type="text" class="form-control" id="widgetText" placeholder="Alice" value="Tombrady">
+      <input type="text" class="form-control" name="widgetText" id="widgetText" placeholder="Alice" [(ngModel)]="text">
     </div>
   </form>
   <form>

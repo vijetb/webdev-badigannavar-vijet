@@ -20,6 +20,9 @@ export class WidgetImageComponent implements OnInit {
 
   url: String;
   width: number;
+  name: String;
+  text: String;
+
   constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
@@ -34,10 +37,11 @@ export class WidgetImageComponent implements OnInit {
         this.editWidget = this.widgetService.findWidgetById(this.widgetId);
         this.url = this.editWidget.url;
         this.width = this.editWidget.width;
+        this.name = this.editWidget.name;
+        this.text = this.editWidget.text;
       } else {
         this.isNewWidget = true;
       }
-
     });
   }
 
@@ -51,11 +55,13 @@ export class WidgetImageComponent implements OnInit {
     }
 
     if (this.isNewWidget) {
-      const widget =  {'_id': null, 'widgetType': 'IMAGE', 'pageId': this.pageId, 'url': this.url, 'width': this.width};
+      const widget =  {'_id': null, 'widgetType': 'IMAGE', 'pageId': this.pageId,
+        'url': this.url, 'width': this.width, 'name' : this.name, 'text': this.text};
       this.widgetService.createWidget(this.pageId, widget);
       this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
     } else {
-      const widget =  {'_id': this.widgetId, 'widgetType': 'IMAGE', 'pageId': this.pageId, 'url': this.url, 'width': this.width};
+      const widget =  {'_id': this.widgetId, 'widgetType': 'IMAGE', 'pageId': this.pageId,
+        'url': this.url, 'width': this.width, 'name' : this.name, 'text': this.text};
       this.widgetService.updateWidget(this.widgetId, widget);
       this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
     }

@@ -18,7 +18,6 @@ export class WidgetService {
     const newUserId = ((+this.widgets[this.widgets.length - 1]._id) + 100).toLocaleString();
     widget._id = newUserId;
     this.widgets.push(widget);
-    this.printData();
     return widget;
   }
 
@@ -30,7 +29,6 @@ export class WidgetService {
         tempWidgets.push(this.widgets[i]);
       }
     }
-    this.printData();
     return tempWidgets;
   }
 
@@ -60,11 +58,11 @@ export class WidgetService {
     }
   }
 
-  printData() {
-    let i = 0;
-    for (i ; i < this.widgets.length ; ++i ) {
-      console.log(this.widgets[i]);
-    }
-  }
+  // printData() {
+  //   let i = 0;
+  //   for (i ; i < this.widgets.length ; ++i ) {
+  //     console.log(this.widgets[i]);
+  //   }
+  // }
 
 }

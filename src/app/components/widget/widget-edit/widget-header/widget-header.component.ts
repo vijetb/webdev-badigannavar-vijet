@@ -17,7 +17,7 @@ export class WidgetHeaderComponent implements OnInit {
   isNewWidget: boolean;
   editWidget;
 
-  size: Number;
+  size: String;
   text: String;
   constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute, private router: Router) {}
 
@@ -44,21 +44,20 @@ export class WidgetHeaderComponent implements OnInit {
     if (this.text === undefined || this.text === '') {
       this.errorMsg = 'Text cannot be empty';
       return;
-    }else if (this.size === undefined || typeof (this.size) !== 'number' || (this.size < 1 || this.size > 6)) {
-      this.errorMsg = 'Size cannot be empty and it should be 1-6';
+    }else if (this.size === undefined || isNaN(Number(this.size)) || (Number(this.size) < 1 || Number(this.size) > 6)) {
+      this.errorMsg = 'Size should be between 1 - 6';
       return;
     }
 
     if (this.isNewWidget) {
-      const widget =  {'_id': null, 'widgetType': 'HEADING', 'pageId': this.pageId, 'size': this.size, 'text': this.text};
+      const widget =  {'_id': null, 'widgetType': 'HEADING', 'pageId': this.pageId, 'size': Number(this.size), 'text': this.text};
       this.widgetService.createWidget(this.pageId, widget);
       this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
     } else {
-      const widget =  {'_id': this.widgetId, 'widgetType': 'HEADING', 'pageId': this.pageId, 'size': this.size, 'text': this.text};
+      const widget =  {'_id': this.widgetId, 'widgetType': 'HEADING', 'pageId': this.pageId, 'size': Number(this.size), 'text': this.text};
       this.widgetService.updateWidget(this.widgetId, widget);
       this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
     }
-
   }
 
   deleteWidget() {
