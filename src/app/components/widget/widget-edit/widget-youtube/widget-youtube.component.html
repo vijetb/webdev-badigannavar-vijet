@@ -6,8 +6,8 @@
       <a (click)="goBack()" class="glyphicon glyphicon-chevron-left"></a>
     </p>
 
-    <a class="navbar-brand" href="#" [hidden]="!isNewWidget"><b>Widget New</b></a>
-    <a class="navbar-brand" href="#" [hidden]="isNewWidget"><b>Widget Edit</b></a>
+    <a class="navbar-brand" [hidden]="!isNewWidget"><b>Widget New</b></a>
+    <a class="navbar-brand" [hidden]="isNewWidget"><b>Widget Edit</b></a>
 
     <p class="navbar-text pull-right">
       <a (click)="updateWidget()" class="glyphicon glyphicon-ok"></a>
@@ -38,7 +38,7 @@
   </form>
   <form>
     <div class="form-group">
-      <label for="widgetWidth">Width</label>
+      <label for="widgetWidth">Width(%)</label>
       <input type="text" class="form-control" id="widgetWidth" name="widgetWidth" placeholder="Alice" [(ngModel)]="width">
     </div>
   </form>

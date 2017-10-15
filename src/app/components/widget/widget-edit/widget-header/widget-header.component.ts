@@ -44,8 +44,8 @@ export class WidgetHeaderComponent implements OnInit {
     if (this.text === undefined || this.text === '') {
       this.errorMsg = 'Text cannot be empty';
       return;
-    }else if (this.size === undefined) {
-      this.errorMsg = 'Size cannot be empty';
+    }else if (this.size === undefined || typeof (this.size) !== 'number' || (this.size < 1 || this.size > 6)) {
+      this.errorMsg = 'Size cannot be empty and it should be 1-6';
       return;
     }
 

@@ -19,7 +19,7 @@ export class WidgetImageComponent implements OnInit {
   editWidget;
 
   url: String;
-  width: String;
+  width: number;
   constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
@@ -45,14 +45,12 @@ export class WidgetImageComponent implements OnInit {
     if (this.url === undefined || this.url === '') {
       this.errorMsg = 'Url cannot be empty';
       return;
-    }else if (this.width === undefined || this.width === '') {
-      this.errorMsg = 'width cannot be empty';
+    }else if (this.width === undefined || isNaN(this.width)) {
+      this.errorMsg = 'width cannot be empty or it should be a number without (%)';
       return;
     }
 
     if (this.isNewWidget) {
-      console.log(this.url);
-      console.log(this.width);
       const widget =  {'_id': null, 'widgetType': 'IMAGE', 'pageId': this.pageId, 'url': this.url, 'width': this.width};
       this.widgetService.createWidget(this.pageId, widget);
       this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
@@ -61,7 +59,6 @@ export class WidgetImageComponent implements OnInit {
       this.widgetService.updateWidget(this.widgetId, widget);
       this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
     }
-
   }
 
   deleteWidget() {
