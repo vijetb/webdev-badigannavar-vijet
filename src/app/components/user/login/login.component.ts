@@ -24,12 +24,14 @@ export class LoginComponent implements OnInit {
     this.loginError = null;
     this.username = this.loginForm.value.username;
     this.password = this.loginForm.value.password;
-     const user: User = this.userService.findUserByCredentials(this.username, this.password);
-     if (user) {
-       this.router.navigate(['/user', user._id]);
-     }else {
-       this.loginError = 'Invalid Username/ Password. Try again...';
-     }
+    this.userService.findUserByCredentials(this.username, this.password)
+       .subscribe((user) =>  {
+         if (user) {
+           this.router.navigate(['/user', user._id]);
+         }else {
+           this.loginError = 'Invalid Username/ Password. Try again...';
+         }
+    });
   }
 
 }

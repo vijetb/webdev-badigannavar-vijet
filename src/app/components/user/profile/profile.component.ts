@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class ProfileComponent implements OnInit {
 
   userId: String;
-  user: User;
+  user: User = new User('', '', '', '', '', '');
   updateStatus: boolean;
   constructor(private userService: UserService, private activatedRoute: ActivatedRoute, private router: Router) {
   }
@@ -20,8 +20,13 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
         this.userId = params['uid'];
+        this.userService.findUserById(this.userId)
+          .subscribe((user) =>  {
+          if (user) {
+              this.user = user;
+            }
+        });
     });
-    this.user = this.userService.findUserById(this.userId);
   }
 
   logout() {
@@ -29,8 +34,9 @@ export class ProfileComponent implements OnInit {
   }
 
   updateUserInfo(user: User) {
-    this.updateStatus = this.userService.updateUser(this.userId, this.user);
+    this.userService.updateUser(this.userId, this.user)
+      .subscribe((data) =>  {
+        this.updateStatus = data.success;
+      });
   }
-
-
 }

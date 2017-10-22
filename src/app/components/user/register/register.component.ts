@@ -20,13 +20,21 @@ export class RegisterComponent implements OnInit {
   registerUser(username: String, password: String, passwordDuplicated: String) {
     this.registrationError = null;
     if (password === passwordDuplicated) {
-      if (this.userService.findUserByUsername(username) != null) {
+
+      this.userService.findUserByUsername(username)
+        .subscribe((data1: any) => {
+          if (data1) {
             this.registrationError = 'Username exists';
-      }else {
+          }else {
             let user: User = new User(null, username, password, null, null, null);
-            user = this.userService.createUser(user);
-            this.router.navigate(['/user', user._id]);
-      }
+            this.userService.createUser(user)
+              .subscribe((data: any) => {
+                user = data;
+                console.log(user);
+                this.router.navigate(['/user', user._id]);
+              });
+          }
+        });
     }else {
         this.registrationError = 'Password mismatch';
     }

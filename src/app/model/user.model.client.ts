@@ -1,6 +1,6 @@
 export class User {
   _id: String;
-  userName: String;
+  username: String;
   password: String;
   firstName: String;
   lastName: String;
@@ -8,7 +8,7 @@ export class User {
 
   constructor(id: String, username: String, password: String, firstName: String, lastName: String, email: String) {
     this._id = id;
-    this.userName = username;
+    this.username = username;
     this.password = password;
     this.firstName = firstName;
     this.lastName = lastName;
