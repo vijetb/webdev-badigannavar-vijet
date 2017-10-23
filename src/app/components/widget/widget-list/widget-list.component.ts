@@ -16,7 +16,6 @@ export class WidgetListComponent implements OnInit {
   websiteId: String;
   pageId: String;
   widgetList;
-  widgetType: WidgetType;
   constructor(private widgetService: WidgetService, private router: Router, private activatedRoute: ActivatedRoute,
               private sanitizer: DomSanitizer) { }
 
@@ -27,7 +26,13 @@ export class WidgetListComponent implements OnInit {
       this.pageId = params['pid'];
     });
 
-    this.widgetList = this.widgetService.findWidgetsByPageId(this.pageId);
+     this.widgetService.findWidgetsByPageId(this.pageId)
+      .subscribe( (data) => {
+          if (data) {
+            this.widgetList = data;
+            console.log(this.widgetList);
+          }
+      });
   }
 
   getSanitizedURL(url) {

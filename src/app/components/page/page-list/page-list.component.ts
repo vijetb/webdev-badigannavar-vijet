@@ -23,10 +23,7 @@ export class PageListComponent implements OnInit {
       this.pageService.findPageByWebsiteId(this.websiteId)
         .subscribe((data) => {
           if (data) {
-            console.log(data)
             this.pageList = data;
-          }else {
-            console.log('false');
           }
         });
     });

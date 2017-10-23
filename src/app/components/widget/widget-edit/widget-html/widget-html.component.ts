@@ -30,8 +30,15 @@ export class WidgetHtmlComponent implements OnInit {
       this.widgetId = params['wgid'];
       if (this.widgetId) {
         this.isNewWidget = false;
-        this.editWidget = this.widgetService.findWidgetById(this.widgetId);
-        this.htmlTag = this.editWidget.text;
+        // this.editWidget = this.widgetService.findWidgetById(this.widgetId);
+        this.widgetService.findWidgetById(this.widgetId)
+          .subscribe((data) => {
+            if (data) {
+              this.editWidget = data;
+              this.htmlTag = this.editWidget.text;
+            }
+          });
+        // this.htmlTag = this.editWidget.text;
       } else {
         this.isNewWidget = true;
       }
@@ -47,12 +54,16 @@ export class WidgetHtmlComponent implements OnInit {
 
     if (this.isNewWidget) {
       const widget =  {'_id': null, 'widgetType': 'HTML', 'pageId': this.pageId, 'text': this.htmlTag};
-      this.widgetService.createWidget(this.pageId, widget);
-      this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+      this.widgetService.createWidget(this.pageId, widget)
+        .subscribe((data) => {
+          this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+        });
     } else {
       const widget =  {'_id': this.widgetId, 'widgetType': 'HTML', 'pageId': this.pageId, 'text': this.htmlTag};
-      this.widgetService.updateWidget(this.widgetId, widget);
-      this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+      this.widgetService.updateWidget(this.widgetId, widget)
+        .subscribe((data) => {
+          this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+        });
     }
 
   }
@@ -61,8 +72,12 @@ export class WidgetHtmlComponent implements OnInit {
     if (this.isNewWidget) {
       this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget', 'new']);
     } else {
-      this.widgetService.deleteWidget(this.widgetId);
-      this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+      this.widgetService.deleteWidget(this.widgetId)
+        .subscribe((data) => {
+          if (data) {
+            this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+          }
+        });
     }
   }
 

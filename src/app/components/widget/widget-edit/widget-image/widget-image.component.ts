@@ -34,11 +34,22 @@ export class WidgetImageComponent implements OnInit {
       this.widgetId = params['wgid'];
       if (this.widgetId) {
         this.isNewWidget = false;
-        this.editWidget = this.widgetService.findWidgetById(this.widgetId);
-        this.url = this.editWidget.url;
-        this.width = this.editWidget.width;
-        this.name = this.editWidget.name;
-        this.text = this.editWidget.text;
+        this.widgetService.findWidgetById(this.widgetId)
+          .subscribe((data) => {
+            if (data) {
+              this.editWidget = data;
+              this.url = this.editWidget.url;
+              this.width = this.editWidget.width;
+              this.name = this.editWidget.name;
+              this.text = this.editWidget.text;
+            }
+          });
+
+        // this.editWidget = this.widgetService.findWidgetById(this.widgetId);
+        // this.url = this.editWidget.url;
+        // this.width = this.editWidget.width;
+        // this.name = this.editWidget.name;
+        // this.text = this.editWidget.text;
       } else {
         this.isNewWidget = true;
       }
@@ -57,13 +68,18 @@ export class WidgetImageComponent implements OnInit {
     if (this.isNewWidget) {
       const widget =  {'_id': null, 'widgetType': 'IMAGE', 'pageId': this.pageId,
         'url': this.url, 'width': this.width, 'name' : this.name, 'text': this.text};
-      this.widgetService.createWidget(this.pageId, widget);
-      this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+      this.widgetService.createWidget(this.pageId, widget)
+        .subscribe((data) => {
+          this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+        });
     } else {
       const widget =  {'_id': this.widgetId, 'widgetType': 'IMAGE', 'pageId': this.pageId,
         'url': this.url, 'width': this.width, 'name' : this.name, 'text': this.text};
-      this.widgetService.updateWidget(this.widgetId, widget);
-      this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+
+      this.widgetService.updateWidget(this.widgetId, widget)
+        .subscribe((data) => {
+          this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+        });
     }
   }
 
@@ -71,8 +87,12 @@ export class WidgetImageComponent implements OnInit {
     if (this.isNewWidget) {
       this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget', 'new']);
     } else {
-      this.widgetService.deleteWidget(this.widgetId);
-      this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+      this.widgetService.deleteWidget(this.widgetId)
+        .subscribe((data) => {
+          if (data) {
+            this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+          }
+        });
     }
   }
 
