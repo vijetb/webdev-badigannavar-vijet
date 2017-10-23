@@ -10,12 +10,6 @@ export class UserService {
   constructor(private http: Http) {}
 
   baseUrl = environment.baseUrl;
-  users: User[] = [
-    new User('123', 'alice', 'alice', 'Alice', 'Wonder', 'alice@alice.com'),
-    new User('234', 'bob', 'bob', 'Bob', 'Marley', 'bob@bob.com'),
-    new User('345', 'charly', 'charly', 'Charly', 'Garcia', 'charley@charley.com'),
-    new User('456', 'jannunzi', 'jannunzi', 'Jose', 'Annunzi', 'jose@jose.com')
-  ];
   createUser(user: User) {
     return this.http.post(this.baseUrl + '/api/user', user)
       .map((res: Response) => {
@@ -56,12 +50,11 @@ export class UserService {
   }
 
   deleteUser(userId: String) {
-    let i = 0;
-    for (i ; i < this.users.length ; ++i ) {
-      if (this.users[i]._id === userId) {
-        this.users.splice(i, 1);
-      }
-    }
+    return this.http.delete(this.baseUrl + '/api/user/' + userId)
+      .map((res: Response) => {
+          return res.json();
+        }
+      );
   }
 }
 

@@ -21,8 +21,13 @@ export class WebsiteNewComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this.userId = params['uid'];
+      this.websiteService.findWebsitesByUser(this.userId)
+        .subscribe((data) => {
+          if (data) {
+            this.websiteList = data;
+          }
+        });
     });
-    this.websiteList = this.websiteService.findWebsitesByUser(this.userId);
   }
 
   addWebsite() {
@@ -31,12 +36,14 @@ export class WebsiteNewComponent implements OnInit {
       return;
     }
     this.newWebsite =  new Website(null, this.websiteName, this.userId, this.websiteDesc);
-    const website11 = this.websiteService.createWebsite(this.userId, this.newWebsite);
-    this.websiteList.push(website11);
-    this.websiteName = null;
-    this.websiteDesc = null;
-    this.router.navigate(['/user', this.userId, 'website']);
+    this.websiteService.createWebsite(this.userId, this.newWebsite)
+      .subscribe((data) => {
+          if (data) {
+            this.websiteList.push(data);
+            this.websiteName = null;
+            this.websiteDesc = null;
+            this.router.navigate(['/user', this.userId, 'website']);
+          }
+      });
   }
-
-
 }

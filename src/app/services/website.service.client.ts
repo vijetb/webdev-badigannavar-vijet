@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Website } from '../model/website.model.client';
+import {Http, Response} from '@angular/http';
+import 'rxjs/Rx';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class WebsiteService {
+  constructor(private http: Http) {}
   websites: Website[] = [
     new Website('123', 'Facebook', '456', 'Lorem'),
     new Website('234', 'Twitter', '456', 'Lorem'),
@@ -13,47 +17,45 @@ export class WebsiteService {
     new Website('789', 'Chess', '234', 'Lorem')
   ];
 
+  baseUrl = environment.baseUrl;
+
   createWebsite(userId: String , website: Website) {
-    const newUserId = ((+this.websites[this.websites.length - 1]._id) + 100).toLocaleString();
-    website._id = newUserId;
-    this.websites.push(website);
-    return website;
+    return this.http.post(this.baseUrl + '/api/user/' + userId + '/website', website)
+      .map((res: Response) => {
+          return res.json();
+        }
+      );
   }
 
   findWebsitesByUser(userId: String) {
-    const tempWebsites: Website[] = [];
-    let i = 0;
-    for (i ; i < this.websites.length ; ++i ) {
-      if (this.websites[i].developerId === userId) {
-        tempWebsites.push(this.websites[i]);
-      }
-    }
-    return tempWebsites;
+    return this.http.get(this.baseUrl + '/api/user/' + userId + '/website')
+      .map((res: Response) => {
+          return res.json();
+        }
+      );
   }
 
   findWebsiteById(websiteId: String) {
-    return this.websites.find(function (website) {
-      return website._id === websiteId;
-    });
+    return this.http.get(this.baseUrl + '/api/website/' + websiteId)
+      .map((res: Response) => {
+          return res.json();
+        }
+      );
   }
 
   updateWebsite(websiteId: String, website: Website) {
-    let i = 0;
-    for (i ; i < this.websites.length ; ++i ) {
-      if (this.websites[i]._id === websiteId) {
-        this.websites[i] = website;
-        return true;
-      }
-    }
-    return false;
+    return this.http.put(this.baseUrl + '/api/website/' + websiteId, website)
+      .map((res: Response) => {
+          return res.json();
+        }
+      );
   }
 
   deleteWebsite(websiteId: String) {
-    let i = 0;
-    for (i ; i < this.websites.length ; ++i ) {
-      if (this.websites[i]._id === websiteId) {
-        this.websites.splice(i, 1);
-      }
-    }
+    return this.http.delete(this.baseUrl + '/api/website/' + websiteId)
+      .map((res: Response) => {
+          return res.json();
+        }
+      );
   }
 }

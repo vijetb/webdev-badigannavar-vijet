@@ -23,16 +23,30 @@ export class WebsiteEditComponent implements OnInit {
       this.userId = params['uid'];
       this.websiteId = params['wid'];
 
-      this.websiteList = this.websiteService.findWebsitesByUser(this.userId);
-      this.updatingWebsite = this.websiteService.findWebsiteById(this.websiteId);
-      this.updatedName = this.updatingWebsite.name;
-      this.updatedDesc = this.updatingWebsite.description;
+      this.websiteService.findWebsitesByUser(this.userId)
+        .subscribe((data) => {
+          if (data) {
+            this.websiteList = data;
+          }
+        });
+      this.websiteService.findWebsiteById(this.websiteId)
+        .subscribe((data) => {
+          if (data) {
+            this.updatingWebsite = data;
+            this.updatedName = this.updatingWebsite.name;
+            this.updatedDesc = this.updatingWebsite.description;
+          }
+        });
     });
   }
 
   deleteWebsite() {
-    this.websiteService.deleteWebsite(this.websiteId);
-    this.router.navigate(['/user', this.userId , 'website']);
+    this.websiteService.deleteWebsite(this.websiteId)
+      .subscribe((data) => {
+        if (data) {
+          this.router.navigate(['/user', this.userId , 'website']);
+        }
+      });
   }
 
   updateWebsite() {
@@ -42,8 +56,13 @@ export class WebsiteEditComponent implements OnInit {
     }
     this.updatingWebsite.name = this.updatedName;
     this.updatingWebsite.description = this.updatedDesc;
-    this.websiteService.updateWebsite(this.websiteId,  this.updatingWebsite);
-    this.router.navigate(['/user', this.userId, 'website']);
+
+    this.websiteService.updateWebsite(this.websiteId,  this.updatingWebsite)
+      .subscribe((data) => {
+        if (data.success === true) {
+          this.router.navigate(['/user', this.userId, 'website']);
+        }
+      });
   }
 
 }
