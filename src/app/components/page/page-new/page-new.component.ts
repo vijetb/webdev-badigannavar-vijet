@@ -25,7 +25,12 @@ export class PageNewComponent implements OnInit {
       this.websiteId = params['wid'];
     });
 
-    this.pageList = this.pageService.findPageByWebsiteId(this.websiteId);
+    this.pageService.findPageByWebsiteId(this.websiteId)
+      .subscribe((data) => {
+        if (data) {
+          this.pageList = data;
+        }
+      });
   }
 
 
@@ -36,10 +41,14 @@ export class PageNewComponent implements OnInit {
     }
     this.page =  new Page(null, this.pageName, this.websiteId, this.pageTitle);
 
-    const tempPage = this.pageService.createPage(this.websiteId, this.page);
-    this.pageList.push(tempPage);
-    this.pageName = null;
-    this.pageTitle = null;
-    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+    this.pageService.createPage(this.websiteId, this.page)
+      .subscribe((data) => {
+          if (data) {
+            this.pageList.push(data);
+            this.pageName = null;
+            this.pageTitle = null;
+            this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+          }
+        });
   }
 }
