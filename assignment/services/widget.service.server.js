@@ -1,4 +1,7 @@
 module.exports = function(app) {
+  var multer = require('multer');
+  var upload = multer({ dest: __dirname+'/../../src/assets/uploads' });
+
   widgets = [
     { '_id': '123', 'widgetType': 'HEADING', 'pageId': '321', 'size': 5, 'text': 'GIZMODO'},
     { '_id': '234', 'widgetType': 'HEADING', 'pageId': '321', 'size': 4, 'text': 'Lorem ipsum'},
@@ -14,6 +17,55 @@ module.exports = function(app) {
   app.get('/api/widget/:widgetId', findWidgetById);
   app.put('/api/widget/:widgetId', updateWidget);
   app.delete('/api/widget/:widgetId', deleteWidget);
+  app.post ("/api/upload", upload.single('myFile'), uploadImage);
+
+  function uploadImage(req, res) {
+    var widgetId = req.body.widgetId;
+    newWidget = false;
+    if(widgetId===""){
+      widgetId = new Date().getMilliseconds().toString();
+      newWidget = true;
+    }
+    var width         = req.body.width;
+    if(width===undefined) {
+      width = 100;
+    }
+    var myFile        = req.file;
+
+    var userId = req.body.userId;
+    var websiteId = req.body.websiteId;
+    var pageId = req.body.pageId;
+
+    var originalname  = myFile.originalname; // file name on user's computer
+    var filename      = myFile.filename;     // new file name in upload folder
+    var path          = myFile.path;         // full path of uploaded file
+    var destination   = myFile.destination;  // folder where file is saved to
+    var size          = myFile.size;
+    var mimetype      = myFile.mimetype;
+
+    url = 'uploads/'+filename + new Date().getMilliseconds().toString();
+    widget = {
+      '_id':widgetId,
+      'widgetType': 'IMAGE',
+      'pageId': pageId,
+      'width': width,
+      'url' : url
+    }
+
+    if(newWidget===true){
+      widgets.push(widget);
+    }else {
+      for ( w in widgets){
+        if(widgets[w]._id === widgetId){
+          widgets[w] = widget;
+          break;
+        }
+      }
+    }
+
+    var callbackUrl   = "/user/" + userId +"/website/"+websiteId+"/page/"+pageId+"/widget";
+    res.redirect(callbackUrl);
+  }
 
   function createWidget(req, res) {
     widget = req.body;

@@ -18,42 +18,34 @@
 <div class="container-fluid">
   <div *ngIf="errorMsg" class="alert alert-danger" role="alert">{{errorMsg}}</div>
 
-  <form>
+  <form ngNoForm action="{{baseUrl}}/api/upload" method="post" enctype="multipart/form-data">
     <div class="form-group">
       <label for="widgetName">Name</label>
       <input type="text" class="form-control" name="widgetName" id="widgetName" placeholder="Alice" [(ngModel)]="name">
     </div>
-  </form>
-  <form>
     <div class="form-group">
       <label for="widgetText">Text</label>
       <input type="text" class="form-control" name="widgetText" id="widgetText" placeholder="Alice" [(ngModel)]="text">
     </div>
-  </form>
-  <form>
     <div class="form-group">
       <label for="widgetUrl">URL</label>
       <input type="text" class="form-control" id="widgetUrl" name="widgetUrl" placeholder="Alice" [(ngModel)]="url">
     </div>
-  </form>
-  <form>
     <div class="form-group">
       <label for="widgetWidth">Width(%)</label>
       <input type="text" class="form-control" id="widgetWidth" name="widgetWidth" placeholder="0-100%" [(ngModel)]="width">
     </div>
-  </form>
-  <form>
     <div class="form-group">
       <label for="widgetUpload">Upload</label>
-      <input type="file" id="widgetUpload">
+      <input name="myFile" type="file" id="widgetUpload">
     </div>
-  </form>
-  <form>
     <div class="form-group">
-      <button class="btn btn-block btn-primary">Upload Image</button>
+      <button class="btn btn-block btn-primary" type="submit">Upload Image</button>
+      <input  name="widgetId" value="{{widgetId}}"   style="display: none"/>
+      <input  name="websiteId" value="{{websiteId}}"   style="display: none"/>
+      <input  name="pageId" value="{{pageId}}"   style="display: none"/>
+      <input  name="userId" value="{{userId}}"   style="display: none"/>
     </div>
-  </form>
-  <form>
     <div class="form-group">
       <button (click)="deleteWidget()" class="btn btn-block btn-danger">Delete</button>
     </div>
