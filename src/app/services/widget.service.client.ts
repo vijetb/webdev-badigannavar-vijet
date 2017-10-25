@@ -58,4 +58,11 @@ export class WidgetService {
       );
   }
 
+  updateWidgetPosition(pageId: String, initialPos: Number, finalPos: Number) {
+    return this.http.put(this.baseUrl + '/api/page/' + pageId + '/widget?initial=' + initialPos + '&final=' + finalPos, null)
+      .map((res: Response) => {
+          return res.json();
+        }
+      );
+  }
 }

@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { Directive, ElementRef, NgModule, Renderer2 } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -28,6 +28,8 @@ import { WidgetImageComponent } from './components/widget/widget-edit/widget-ima
 import { WidgetYoutubeComponent } from './components/widget/widget-edit/widget-youtube/widget-youtube.component';
 import { WidgetHtmlComponent } from './components/widget/widget-edit/widget-html/widget-html.component';
 import { WidgetChooserComponent } from './components/widget/widget-chooser/widget-chooser.component';
+import { SortableDirective } from './directives/sortable.directive';
+
 
 @NgModule({
   // Declare components here
@@ -50,16 +52,16 @@ import { WidgetChooserComponent } from './components/widget/widget-chooser/widge
     WidgetImageComponent,
     WidgetYoutubeComponent,
     WidgetHtmlComponent,
-    WidgetChooserComponent
+    WidgetChooserComponent,
+    SortableDirective
   ],
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule,
-    Routing
-  ],
+    Routing],
   // Client Side services here
-  providers: [ TestService, UserService, WebsiteService, PageService, WidgetService],
+  providers: [TestService, UserService, WebsiteService, PageService, WidgetService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

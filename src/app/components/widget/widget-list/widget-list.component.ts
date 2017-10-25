@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { WidgetService } from '../../../services/widget.service.client';
 import { WidgetType } from '../../../model/widgettype.model.client';
 import { DomSanitizer } from '@angular/platform-browser';
+import { SortableDirective } from '../../../directives/sortable.directive';
 
 @Component({
   selector: 'app-widget-list',
@@ -37,6 +38,17 @@ export class WidgetListComponent implements OnInit {
 
   getSanitizedURL(url) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+
+  myFunc(event: Object) {
+    this.widgetService.updateWidgetPosition(this.pageId, event['startIndex'], event['endIndex'])
+        .subscribe((data) => {
+            if (data && data.success === true) {
+              console.log('success');
+            }else {
+              console.log('error in updating position');
+            }
+        });
   }
 
 }

@@ -3,6 +3,9 @@ module.exports = function(app) {
   var upload = multer({ dest: __dirname+'/../../src/assets/uploads' });
 
   widgets = [
+    // { '_id': '123', 'widgetType': 'HEADING', 'pageId': '321', 'size': 5, 'text': 'GIZMODO'},
+    // { '_id': '234', 'widgetType': 'HEADING', 'pageId': '321', 'size': 4, 'text': 'Lorem ipsum'},
+    // { '_id': '567', 'widgetType': 'HEADING', 'pageId': '321', 'size': 4, 'text': 'Lorem ipsum'}
     { '_id': '123', 'widgetType': 'HEADING', 'pageId': '321', 'size': 5, 'text': 'GIZMODO'},
     { '_id': '234', 'widgetType': 'HEADING', 'pageId': '321', 'size': 4, 'text': 'Lorem ipsum'},
     { '_id': '345', 'widgetType': 'IMAGE', 'pageId': '321', 'width': '100', 'url': 'http://lorempixel.com/400/200/'},
@@ -18,6 +21,7 @@ module.exports = function(app) {
   app.put('/api/widget/:widgetId', updateWidget);
   app.delete('/api/widget/:widgetId', deleteWidget);
   app.post ("/api/upload", upload.single('myFile'), uploadImage);
+  app.put("/api/page/:pageId/widget", sortWidgets);
 
   function uploadImage(req, res) {
     var widgetId = req.body.widgetId;
@@ -118,5 +122,32 @@ module.exports = function(app) {
         return;
       }
     }
+  }
+
+  function sortWidgets(req, res) {
+    var pageId = req.params['pageId'];
+    var start = req.query['initial'];
+    var end = req.query['final'];
+
+    var results = [];
+    var indexes = [];
+    var i = 0;
+    while(i < widgets.length) {
+      if(widgets[i].pageId === pageId){
+        results.push(widgets[i]);
+        // indexes.push(w);
+        widgets.splice(i,1);
+        i=0;
+        continue;
+      }
+      i++;
+    }
+
+    results.splice(end, 0, results.splice(start, 1)[0]);
+    for(var w in results){
+      widgets.push(results[w]);
+    }
+
+    res.json({success:true})
   }
 }

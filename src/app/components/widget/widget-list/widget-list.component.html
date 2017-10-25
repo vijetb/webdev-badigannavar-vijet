@@ -17,7 +17,7 @@
 <!--Header end-->
 <div class="container-fluid">
   <div class="row">
-    <ul class="list-group">
+    <ul class="list-group" appSortable (newIndexes)="myFunc($event)">
       <div *ngFor="let widget of widgetList">
 
         <div [ngSwitch]="widget.widgetType">
