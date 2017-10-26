@@ -29,7 +29,7 @@ import { WidgetYoutubeComponent } from './components/widget/widget-edit/widget-y
 import { WidgetHtmlComponent } from './components/widget/widget-edit/widget-html/widget-html.component';
 import { WidgetChooserComponent } from './components/widget/widget-chooser/widget-chooser.component';
 import { SortableDirective } from './directives/sortable.directive';
-
+import { QuillEditorModule } from 'ngx-quill-editor';
 
 @NgModule({
   // Declare components here
@@ -59,7 +59,8 @@ import { SortableDirective } from './directives/sortable.directive';
     BrowserModule,
     HttpModule,
     FormsModule,
-    Routing],
+    Routing,
+    QuillEditorModule],
   // Client Side services here
   providers: [TestService, UserService, WebsiteService, PageService, WidgetService],
   bootstrap: [AppComponent]

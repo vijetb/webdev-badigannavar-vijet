@@ -21,7 +21,7 @@
   <form>
     <div class="form-group">
       <label for="widgetText">HTML</label>
-      <input type="text" class="form-control" id="widgetText" name="widgetText" placeholder="<p> Anything </p>" [(ngModel)]="htmlTag">
+      <quill-editor id="widgetText" name="text" [(ngModel)]="htmlTag"></quill-editor>
     </div>
   </form>
   <form>
