@@ -1,0 +1,63 @@
+<!--Header-->
+<nav class="navbar navbar-default navbar-fixed-top widget-navbar-header">
+  <div class="container-fluid">
+
+    <p class="navbar-text pull-left">
+      <a (click)="goBack()" class="glyphicon glyphicon-chevron-left"></a>
+    </p>
+
+    <a class="navbar-brand" [hidden]="!isNewWidget"><b>Widget New</b></a>
+    <a class="navbar-brand" [hidden]="isNewWidget"><b>Widget Edit</b></a>
+
+    <p class="navbar-text pull-right">
+      <a (click)="updateWidget()" class="glyphicon glyphicon-ok"></a>
+    </p>
+  </div>
+</nav>
+<!--Header end-->
+<div class="container-fluid">
+  <div *ngIf="errorMsg" class="alert alert-danger" role="alert">{{errorMsg}}</div>
+
+  <form>
+    <div class="form-group">
+      <label for="widgetName">Name</label>
+      <input type="text" class="form-control" name="widgetName" id="widgetName" placeholder="Alice" [(ngModel)]="name">
+    </div>
+    <div class="form-group">
+      <label for="widgetText">Text</label>
+      <input type="text" class="form-control" name="widgetText" id="widgetText" placeholder="Alice" [(ngModel)]="text">
+    </div>
+    <div class="form-group">
+      <label for="widgetUrl">Rows</label>
+      <input type="text" class="form-control" id="widgetUrl" name="widgetUrl" placeholder="Alice" [(ngModel)]="rows">
+    </div>
+    <div class="form-group">
+      <label for="widgetWidth">Placeholder</label>
+      <input type="text" class="form-control" id="widgetWidth" name="widgetWidth" placeholder="0-100%" [(ngModel)]="placeholder">
+    </div>
+    <div class="form-group">
+      <div class="input-group">
+        <span class="input-group-addon">
+          <input *ngIf="isFormatted===false" (click)="isFormattedClicked()" type="checkbox">
+          <input *ngIf="isFormatted===true" (click)="isFormattedClicked()" type="checkbox" checked>
+        </span>
+        <input id="email" type="text" class="form-control" disabled name="email" placeholder="Email" value="Formatted">
+      </div>
+    </div>
+    <div class="form-group">
+      <button (click)="deleteWidget()" class="btn btn-block btn-danger">Delete</button>
+    </div>
+  </form>
+</div>
+
+<!-- Footer -->
+<nav class="navbar navbar-default navbar-fixed-bottom widget-navbar-footer">
+  <div class="container-fluid">
+    <p class="navbar-text pull-right">
+      <a routerLink="/user/{{userId}}">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+    </p>
+  </div>
+</nav>
+<!--footer end-->

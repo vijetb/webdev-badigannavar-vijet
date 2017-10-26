@@ -92,6 +92,26 @@
                 </div>
               </li>
             </div>
+
+          <div *ngSwitchCase="'TEXT'">
+            <li class="list-group-item widget-list">
+              <div class="widget-container">
+                <div class="widget-options">
+                  <a class="glyphicon glyphicon-align-justify widget-option pull-right color-black"></a>
+                  <a class="glyphicon glyphicon-cog pull-right widget-option color-blue"
+                     routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/5/{{widget['_id']}}"></a>
+                </div>
+                <div *ngIf="widget.isFormatted === true">
+                  <quill-editor [(ngModel)]="widget.text" name="text"></quill-editor>
+                </div>
+                <input *ngIf="widget.isFormatted===false && widget.rows===1" type="text"
+                       placeholder="{{widget.placeholder}}" class="form-control" [value]="widget.text"/>
+                <textarea *ngIf="widget.isFormatted===false && (widget.rows > 1)"
+                          rows="{{widget.rows}}" placeholder="{{widget.placeholder}}"
+                          class="form-control">{{widget.text}}</textarea>
+              </div>
+            </li>
+          </div>
         </div>
 
       </div>

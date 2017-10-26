@@ -13,13 +13,12 @@ module.exports = function(app) {
     { '_id': '678', 'widgetType': 'YOUTUBE', 'pageId': '321', 'width': '100', 'url': 'https://www.youtube.com/embed/AM2Ivdi9c4E' },
     { '_id': '789', 'widgetType': 'HTML', 'pageId': '321', 'text': '<p>Lorem ipsum</p>'}
   ];
-
+  app.post ("/api/upload", upload.single('myFile'), uploadImage);
   app.post('/api/page/:pageId/widget', createWidget);
   app.get('/api/page/:pageId/widget', findAllWidgetsForPage);
   app.get('/api/widget/:widgetId', findWidgetById);
   app.put('/api/widget/:widgetId', updateWidget);
   app.delete('/api/widget/:widgetId', deleteWidget);
-  app.post ("/api/upload", upload.single('myFile'), uploadImage);
   app.put("/api/page/:pageId/widget", sortWidgets);
 
   function uploadImage(req, res) {

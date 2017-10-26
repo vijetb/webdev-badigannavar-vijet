@@ -30,6 +30,7 @@ import { WidgetHtmlComponent } from './components/widget/widget-edit/widget-html
 import { WidgetChooserComponent } from './components/widget/widget-chooser/widget-chooser.component';
 import { SortableDirective } from './directives/sortable.directive';
 import { QuillEditorModule } from 'ngx-quill-editor';
+import { WidgetTextComponent } from './components/widget/widget-edit/widget-text/widget-text.component';
 
 @NgModule({
   // Declare components here
@@ -53,7 +54,8 @@ import { QuillEditorModule } from 'ngx-quill-editor';
     WidgetYoutubeComponent,
     WidgetHtmlComponent,
     WidgetChooserComponent,
-    SortableDirective
+    SortableDirective,
+    WidgetTextComponent
   ],
   imports: [
     BrowserModule,
