@@ -1,14 +1,13 @@
 module.exports = function(app) {
   var multer = require('multer');
-  var upload = multer({ dest: __dirname+'/../../src/assets/uploads' });
+  var upload = multer({ dest: __dirname + '/../../dist/assets/uploads' });
 
+  console.log(__dirname);
   widgets = [
-    // { '_id': '123', 'widgetType': 'HEADING', 'pageId': '321', 'size': 5, 'text': 'GIZMODO'},
-    // { '_id': '234', 'widgetType': 'HEADING', 'pageId': '321', 'size': 4, 'text': 'Lorem ipsum'},
-    // { '_id': '567', 'widgetType': 'HEADING', 'pageId': '321', 'size': 4, 'text': 'Lorem ipsum'}
     { '_id': '123', 'widgetType': 'HEADING', 'pageId': '321', 'size': 5, 'text': 'GIZMODO'},
     { '_id': '234', 'widgetType': 'HEADING', 'pageId': '321', 'size': 4, 'text': 'Lorem ipsum'},
     { '_id': '345', 'widgetType': 'IMAGE', 'pageId': '321', 'width': '100', 'url': 'http://lorempixel.com/400/200/'},
+    { '_id': '422', 'widgetType': 'IMAGE', 'pageId': '321', 'width': '100', 'url': './src/assets/uploads/97558eca14058498c15df72e86b14d9c.jpg'},
     { '_id': '456', 'widgetType': 'HTML', 'pageId': '321', 'text': '<p>Lorem ipsum</p>'},
     { '_id': '567', 'widgetType': 'HEADING', 'pageId': '321', 'size': 4, 'text': 'Lorem ipsum'},
     { '_id': '678', 'widgetType': 'YOUTUBE', 'pageId': '321', 'width': '100', 'url': 'https://www.youtube.com/embed/AM2Ivdi9c4E' },
@@ -30,7 +29,7 @@ module.exports = function(app) {
       widgetId = new Date().getMilliseconds().toString();
       newWidget = true;
     }
-    var width         = req.body.width;
+    var width = req.body.width;
     if(width===undefined) {
       width = 100;
     }
@@ -47,7 +46,7 @@ module.exports = function(app) {
     var size          = myFile.size;
     var mimetype      = myFile.mimetype;
 
-    url = 'uploads/'+filename + new Date().getMilliseconds().toString();
+    url = 'assets/uploads/'+filename;
     widget = {
       '_id':widgetId,
       'widgetType': 'IMAGE',
