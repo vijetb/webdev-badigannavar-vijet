@@ -1,9 +1,4 @@
-module.exports = function(app) {
-  pages = [
-    { "_id": "321", "name": "Post 1", "websiteId": "456", "description": "Lorem" },
-    { "_id": "432", "name": "Post 2", "websiteId": "456", "description": "Lorem" },
-    { "_id": "543", "name": "Post 3", "websiteId": "456", "description": "Lorem" }
-  ]
+module.exports = function(app, model) {
 
   app.post('/api/website/:websiteId/page', createPage);
   app.get('/api/website/:websiteId/page', findAllPagesForWebsite);
@@ -13,55 +8,50 @@ module.exports = function(app) {
 
   function createPage(req, res) {
     page = req.body;
-    page._id = new Date().getMilliseconds().toString();
-    this.pages.push(page);
-    return res.json(page);
+    model.pageModel.createPage(page)
+      .then(function (p) {
+        res.json(p);
+      }, function (err) {
+        res.json(err);
+      })
   }
 
   function findAllPagesForWebsite(req, res) {
     websiteId = req.params['websiteId'];
-    tempPages = [];
-    for (i=0; i < pages.length; ++i) {
-      if (pages[i].websiteId === websiteId) {
-          tempPages.push(pages[i]);
-      }
-    }
-    return res.json(tempPages);
+    model.pageModel.findAllPagesForWebsite(websiteId)
+      .then(function (pages) {
+        res.json(pages);
+      })
   }
 
   function findPageById(req, res) {
     pageId = req.params['pageId'];
-    for(var p in pages){
-      if(pages[p]._id === pageId){
-        res.json(pages[p]);
-        return;
-      }
-    }
-    res.json(null);
+    model.pageModel.findPageById(pageId)
+      .then(function (p) {
+        res.json(p);
+      }, function (err) {
+        res.json(err);
+      })
   }
 
   function updatePage(req, res) {
     var page = req.body;
     var pageId = req.params['pageId'];
-
-    for(var p in pages) {
-      if (pages[p]._id === pageId) {
-          pages[p] = page;
-          res.json({success:true});
-          return;
-      }
-    }
-    return res.json({success:false});
+    model.pageModel.updatePage(page)
+      .then(function (p) {
+        res.json({success:true});
+      }, function (err) {
+        res.json({success:false});
+      })
   }
 
   function deletePage(req, res) {
     var pageId = req.params['pageId'];
-    for(var p in pages) {
-      if (pages[p]._id === pageId) {
-        pages.splice(p, 1);
-        res.json({})
-        return;
-      }
-    }
+    model.pageModel.deletePage(pageId)
+      .then(function (p) {
+        res.json({success:true});
+      }, function (err) {
+        res.json({success:false});
+      })
   }
 }
