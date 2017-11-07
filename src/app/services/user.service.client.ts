@@ -11,7 +11,11 @@ export class UserService {
 
   baseUrl = environment.baseUrl;
   createUser(user: User) {
-    return this.http.post(this.baseUrl + '/api/user', user)
+    const u = {
+      username: user.username,
+      password: user.password
+    };
+    return this.http.post(this.baseUrl + '/api/user', u)
       .map((res: Response) => {
           return res.json();
         }
