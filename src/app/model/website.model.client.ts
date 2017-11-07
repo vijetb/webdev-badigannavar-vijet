@@ -6,7 +6,9 @@ export class Website {
   description: String;
 
   constructor(id: String, name: String, developerId: String, description: String) {
-    this._id = id;
+    if ( id !== null) {
+      this._id = id;
+    }
     this.name = name;
     this.developerId = developerId;
     this.description = description;

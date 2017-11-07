@@ -6,18 +6,14 @@ UserModel.setModel = setModel;
 UserModel.createUser = createUser;
 UserModel.findUserById = findUserById;
 UserModel.findUserByUsername = findUserByUsername;
-// UserModel.findUserByCredentials = findUserByCredentials;
 UserModel.updateUser = updateUser;
 UserModel.deleteUser = deleteUser;
-// UserModel.addWebsiteToUser = addWebsiteToUser;
-// UserModel.deleteWebsiteForUser = deleteWebsiteForUser;
 
 module.exports = UserModel;
 
 function setModel(_model) {
   model = _model;
 }
-
 
 function createUser(user) {
   return UserModel.create(user);
