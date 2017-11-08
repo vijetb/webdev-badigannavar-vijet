@@ -10,7 +10,7 @@ WidgetModel.findAllWidgetForPage = findAllWidgetForPage;
 WidgetModel.findWidgetById = findWidgetById;
 WidgetModel.updateWidget = updateWidget;
 WidgetModel.deleteWidget = deleteWidget;
-// WidgetModel.reorderWidget = reorderWidget;
+WidgetModel.reorderWidget = reorderWidget;
 module.exports = WidgetModel;
 
 function setModel(_model) {
@@ -59,4 +59,8 @@ function deleteWidget(pageId, widgetId) {
           return status;
         })
     });
+}
+
+function reorderWidget(pageId, start, final) {
+  return PageModel.reorderWidgetsWithinPage(pageId, start, final);
 }

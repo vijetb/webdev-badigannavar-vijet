@@ -131,25 +131,14 @@ module.exports = function(app, model) {
     var start = req.query['initial'];
     var end = req.query['final'];
 
-    var results = [];
-    var indexes = [];
-    var i = 0;
-    while(i < widgets.length) {
-      if(widgets[i].pageId === pageId){
-        results.push(widgets[i]);
-        // indexes.push(w);
-        widgets.splice(i,1);
-        i=0;
-        continue;
-      }
-      i++;
-    }
-
-    results.splice(end, 0, results.splice(start, 1)[0]);
-    for(var w in results){
-      widgets.push(results[w]);
-    }
-
-    res.json({success:true})
+    model.widgetModel.reorderWidget(pageId, start, end)
+      .then(function (status) {
+          console.log(status);
+        res.json({success:true});
+      }, function (err) {
+        console.log(err);
+          res.json({success:false});
+        }
+      );
   }
 }
