@@ -7,7 +7,7 @@ module.exports = function(app, model) {
   app.get('/api/page/:pageId/widget', findAllWidgetsForPage);
   app.get('/api/widget/:widgetId', findWidgetById);
   app.put('/api/widget/:widgetId', updateWidget);
-  app.delete('/api/widget/:widgetId', deleteWidget);
+  app.delete('/api/:pageId/widget/:widgetId', deleteWidget);
   app.put("/api/page/:pageId/widget", sortWidgets);
 
   function uploadImage(req, res) {
@@ -96,8 +96,11 @@ module.exports = function(app, model) {
 
   function deleteWidget(req, res) {
     widgetId = req.params['widgetId'];
-    model.widgetModel.deleteWidget(widgetId)
-      .then(function (widget) {
+    pageId = req.params['pageId'];
+    console.log(req.body);
+    model.widgetModel.deleteWidget(pageId, widgetId)
+      .then(function (status) {
+        console.log(status);
         res.json({})
       }, function (err) {
         res.json(null);

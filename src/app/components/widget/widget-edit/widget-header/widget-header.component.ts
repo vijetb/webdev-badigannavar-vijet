@@ -76,7 +76,7 @@ export class WidgetHeaderComponent implements OnInit {
     if (this.isNewWidget) {
       this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget', 'new']);
     } else {
-      this.widgetService.deleteWidget(this.widgetId)
+      this.widgetService.deleteWidget(this.pageId, this.widgetId)
           .subscribe((data) => {
               if (data) {
                 this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);

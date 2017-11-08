@@ -54,7 +54,7 @@ function updateWidget(widget) {
 function deleteWidget(pageId, widgetId) {
   return WidgetModel.deleteOne({_id: widgetId})
     .then(function (status) {
-      PageModel.update({_id: widget.pageId}, {$pull:{'widgets': {_id:widget._id}}})
+      PageModel.update({_id: pageId}, {$pull:{'widgets': {_id:widgetId}}})
         .then(function (status) {
           return status;
         })

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Widget } from '../model/widget.model.client';
 import {Http, Response} from '@angular/http';
 import 'rxjs/Rx';
 import {environment} from '../../environments/environment';
@@ -40,8 +39,8 @@ export class WidgetService {
       );
   }
 
-  deleteWidget(widgetId: String) {
-    return this.http.delete(this.baseUrl + '/api/widget/' + widgetId)
+  deleteWidget(pageId: String, widgetId: String) {
+    return this.http.delete(this.baseUrl + '/api/' + pageId + '/widget/' + widgetId)
       .map((res: Response) => {
           return res.json();
         }

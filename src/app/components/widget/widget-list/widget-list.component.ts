@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Widget } from '../../../model/widget.model.client';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WidgetService } from '../../../services/widget.service.client';
-import { WidgetType } from '../../../model/widgettype.model.client';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SortableDirective } from '../../../directives/sortable.directive';
 
