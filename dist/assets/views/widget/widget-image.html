@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta tags for making website for mobile-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+
+
+  <meta charset="UTF-8">
+  <title>Widget-List</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <link href="../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <script src="../../vendors/bootstrap/dist/js/bootstrap.js"></script>
+
+
+  <!--CUSTON-LIBRARIES-->
+  <link href="../../css/styles.css" rel="stylesheet"/>
+</head>
+<body>
+<!--Header-->
+<nav class="navbar navbar-default navbar-fixed-top widget-navbar-header">
+  <div class="container-fluid">
+
+    <p class="navbar-text pull-left">
+      <a href="widget-chooser.html" class="glyphicon glyphicon-chevron-left"></a>
+    </p>
+
+    <a class="navbar-brand" href="#"><b>Widget Edit</b></a>
+
+    <p class="navbar-text pull-right">
+      <a href="widget-list.html" class="glyphicon glyphicon-ok"></a>
+    </p>
+  </div>
+</nav>
+<!--Header end-->
+<div class="container-fluid">
+  <form>
+    <div class="form-group">
+      <label for="widgetName">Name</label>
+      <input type="text" class="form-control" id="widgetName" placeholder="Alice" value="Sports">
+    </div>
+  </form>
+  <form>
+    <div class="form-group">
+      <label for="widgetText">Text</label>
+      <input type="text" class="form-control" id="widgetText" placeholder="Alice" value="Sports image">
+    </div>
+  </form>
+  <form>
+    <div class="form-group">
+      <label for="widgetUrl">URL</label>
+      <input type="text" class="form-control" id="widgetUrl" placeholder="Alice" value="www.gizmodo.com/12sg?sfwer">
+    </div>
+  </form>
+  <form>
+    <div class="form-group">
+      <label for="widgetWidth">Width</label>
+      <input type="text" class="form-control" id="widgetWidth" placeholder="0-100%" value="100%">
+    </div>
+  </form>
+  <form>
+    <div class="form-group">
+      <label for="widgetUpload">Upload</label>
+      <input type="file" id="widgetUpload">
+    </div>
+  </form>
+  <form>
+    <div class="form-group">
+      <button class="btn btn-block btn-primary">Upload Image</button>
+    </div>
+  </form>
+  <form>
+    <div class="form-group">
+      <button class="btn btn-block btn-danger">Delete</button>
+    </div>
+  </form>
+</div>
+
+<!-- Footer -->
+<nav class="navbar navbar-default navbar-fixed-bottom widget-navbar-footer">
+  <div class="container-fluid">
+    <p class="navbar-text pull-right">
+      <a href="../user/profile.html">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+    </p>
+  </div>
+</nav>
+<!--footer end-->
+</body>
+</html>

@@ -2,17 +2,6 @@ module.exports = function(app, model) {
   var multer = require('multer');
   var upload = multer({ dest: __dirname + '/../../dist/assets/uploads' });
 
-  console.log(__dirname);
-  widgets = [
-    { '_id': '123', 'widgetType': 'HEADING', 'pageId': '321', 'size': 5, 'text': 'GIZMODO'},
-    { '_id': '234', 'widgetType': 'HEADING', 'pageId': '321', 'size': 4, 'text': 'Lorem ipsum'},
-    { '_id': '345', 'widgetType': 'IMAGE', 'pageId': '321', 'width': '100', 'url': 'http://lorempixel.com/400/200/'},
-    { '_id': '422', 'widgetType': 'IMAGE', 'pageId': '321', 'width': '100', 'url': './src/assets/uploads/97558eca14058498c15df72e86b14d9c.jpg'},
-    { '_id': '456', 'widgetType': 'HTML', 'pageId': '321', 'text': '<p>Lorem ipsum</p>'},
-    { '_id': '567', 'widgetType': 'HEADING', 'pageId': '321', 'size': 4, 'text': 'Lorem ipsum'},
-    { '_id': '678', 'widgetType': 'YOUTUBE', 'pageId': '321', 'width': '100', 'url': 'https://www.youtube.com/embed/AM2Ivdi9c4E' },
-    { '_id': '789', 'widgetType': 'HTML', 'pageId': '321', 'text': '<p>Lorem ipsum</p>'}
-  ];
   app.post ("/api/upload", upload.single('myFile'), uploadImage);
   app.post('/api/page/:pageId/widget', createWidget);
   app.get('/api/page/:pageId/widget', findAllWidgetsForPage);
@@ -23,50 +12,40 @@ module.exports = function(app, model) {
 
   function uploadImage(req, res) {
     var widgetId = req.body.widgetId;
-    newWidget = false;
-    if(widgetId===""){
-      widgetId = new Date().getMilliseconds().toString();
-      newWidget = true;
-    }
+    var widget = req.body;
+
     var width = req.body.width;
-    if(width===undefined) {
-      width = 100;
+    if(width === "") {
+      widget.width = 100;
     }
-    var myFile        = req.file;
+    var myFile = req.file;
 
     var userId = req.body.userId;
     var websiteId = req.body.websiteId;
     var pageId = req.body.pageId;
+    widget.widgetType =  'IMAGE';
 
-    var originalname  = myFile.originalname; // file name on user's computer
-    var filename      = myFile.filename;     // new file name in upload folder
-    var path          = myFile.path;         // full path of uploaded file
-    var destination   = myFile.destination;  // folder where file is saved to
-    var size          = myFile.size;
-    var mimetype      = myFile.mimetype;
-
-    url = 'assets/uploads/'+filename;
-    widget = {
-      '_id':widgetId,
-      'widgetType': 'IMAGE',
-      'pageId': pageId,
-      'width': width,
-      'url' : url
-    }
-
-    if(newWidget===true){
-      widgets.push(widget);
-    }else {
-      for ( w in widgets){
-        if(widgets[w]._id === widgetId){
-          widgets[w] = widget;
-          break;
-        }
-      }
-    }
+    var filename      = myFile.filename;
+    widget.url = 'assets/uploads/'+filename;
 
     var callbackUrl   = "/user/" + userId +"/website/"+websiteId+"/page/"+pageId+"/widget";
-    res.redirect(callbackUrl);
+
+    if(widgetId === ""){
+      model.widgetModel.createWidget(widget)
+        .then(function (wid) {
+          res.redirect(callbackUrl);
+        }, function (err) {
+          res.json(null);
+        })
+    }else {
+      widget._id = widgetId;
+      model.widgetModel.updateWidget(widget)
+        .then(function (status) {
+          res.redirect(callbackUrl);
+        }, function (err) {
+          res.json(null);
+        })
+    }
   }
 
   function createWidget(req, res) {
@@ -109,7 +88,6 @@ module.exports = function(app, model) {
     widget = req.body;
     model.widgetModel.updateWidget(widget)
       .then(function (status) {
-        // console.log(status);
         res.json({success:true});
       }, function (err) {
         res.json(null);
@@ -133,10 +111,8 @@ module.exports = function(app, model) {
 
     model.widgetModel.reorderWidget(pageId, start, end)
       .then(function (status) {
-          console.log(status);
         res.json({success:true});
       }, function (err) {
-        console.log(err);
           res.json({success:false});
         }
       );
