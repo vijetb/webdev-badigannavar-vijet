@@ -53,7 +53,7 @@ export class WidgetHtmlComponent implements OnInit {
     }
 
     if (this.isNewWidget) {
-      const widget =  {'_id': null, 'widgetType': 'HTML', 'pageId': this.pageId, 'text': this.htmlTag};
+      const widget =  {'widgetType': 'HTML', 'pageId': this.pageId, 'text': this.htmlTag};
       this.widgetService.createWidget(this.pageId, widget)
         .subscribe((data) => {
           this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);

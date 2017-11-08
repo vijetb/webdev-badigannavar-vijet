@@ -43,8 +43,9 @@ export class WidgetTextComponent implements OnInit {
         this.widgetService.findWidgetById(this.widgetId)
           .subscribe((data) => {
             if (data) {
+              console.log(data);
               this.editWidget = data;
-              this.isFormatted = this.editWidget.isFormatted;
+              this.isFormatted = this.editWidget.formatted;
               this.rows = this.editWidget.rows;
               this.name = this.editWidget.name;
               this.text = this.editWidget.text;
@@ -66,8 +67,8 @@ export class WidgetTextComponent implements OnInit {
     const numRows = Number(this.rows);
     if (this.isNewWidget) {
 
-      const widget =  {'_id': null, 'widgetType': 'TEXT', 'pageId': this.pageId,
-        'text': this.text, 'placeholder': this.placeholder, 'name' : this.name, 'rows': numRows, 'isFormatted': this.isFormatted};
+      const widget =  {'widgetType': 'TEXT', 'pageId': this.pageId,
+        'text': this.text, 'placeholder': this.placeholder, 'name' : this.name, 'rows': numRows, 'formatted': this.isFormatted};
       console.log('new' + this.rows);
       this.widgetService.createWidget(this.pageId, widget)
         .subscribe((data) => {
@@ -75,7 +76,7 @@ export class WidgetTextComponent implements OnInit {
         });
     } else {
       const widget =  {'_id': this.widgetId, 'widgetType': 'TEXT', 'pageId': this.pageId,
-        'text': this.text, 'placeholder': this.placeholder, 'name' : this.name, 'rows': numRows, 'isFormatted': this.isFormatted};
+        'text': this.text, 'placeholder': this.placeholder, 'name' : this.name, 'rows': numRows, 'formatted': this.isFormatted};
       console.log('editted' + this.rows);
       this.widgetService.updateWidget(this.widgetId, widget)
         .subscribe((data) => {

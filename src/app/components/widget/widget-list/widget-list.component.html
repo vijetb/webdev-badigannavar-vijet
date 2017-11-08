@@ -101,12 +101,12 @@
                   <a class="glyphicon glyphicon-cog pull-right widget-option color-blue"
                      routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/5/{{widget['_id']}}"></a>
                 </div>
-                <div *ngIf="widget.isFormatted === true">
+                <div *ngIf="widget.formatted === true">
                   <quill-editor [(ngModel)]="widget.text" name="text"></quill-editor>
                 </div>
-                <input *ngIf="widget.isFormatted===false && widget.rows===1" type="text"
+                <input *ngIf="widget.formatted===false && widget.rows===1" type="text"
                        placeholder="{{widget.placeholder}}" class="form-control" [value]="widget.text"/>
-                <textarea *ngIf="widget.isFormatted===false && (widget.rows > 1)"
+                <textarea *ngIf="widget.formatted===false && (widget.rows > 1)"
                           rows="{{widget.rows}}" placeholder="{{widget.placeholder}}"
                           class="form-control">{{widget.text}}</textarea>
               </div>

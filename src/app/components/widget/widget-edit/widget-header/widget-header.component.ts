@@ -58,7 +58,7 @@ export class WidgetHeaderComponent implements OnInit {
     }
 
     if (this.isNewWidget) {
-      const widget =  {'_id': null, 'widgetType': 'HEADING', 'pageId': this.pageId, 'size': Number(this.size), 'text': this.text};
+      const widget =  {'widgetType': 'HEADING', 'pageId': this.pageId, 'size': Number(this.size), 'text': this.text};
       this.widgetService.createWidget(this.pageId, widget)
         .subscribe((data) => {
           this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);

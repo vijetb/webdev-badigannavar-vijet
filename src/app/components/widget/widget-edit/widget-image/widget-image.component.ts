@@ -67,7 +67,7 @@ export class WidgetImageComponent implements OnInit {
     }
 
     if (this.isNewWidget) {
-      const widget =  {'_id': null, 'widgetType': 'IMAGE', 'pageId': this.pageId,
+      const widget =  {'widgetType': 'IMAGE', 'pageId': this.pageId,
         'url': this.url, 'width': this.width, 'name' : this.name, 'text': this.text};
       this.widgetService.createWidget(this.pageId, widget)
         .subscribe((data) => {
