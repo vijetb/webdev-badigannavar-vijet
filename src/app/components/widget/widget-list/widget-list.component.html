@@ -68,14 +68,16 @@
             </div>
 
             <div *ngSwitchCase="'YOUTUBE'">
-              <li class="list-group-item widget-list youtube-widget">
-                <div class="widget-container">
+              <li class="list-group-item widget-list">
+                <div class="youtube-widget">
+                  <iframe class="video-frame" [style.width]="widget['width'] + '%'" [src]="getSanitizedURL(widget['url'])" frameborder="0" allowfullscreen></iframe>
                   <div class="widget-options">
                     <a class="glyphicon glyphicon-align-justify widget-option pull-right color-black"></a>
                     <a class="glyphicon glyphicon-cog pull-right widget-option color-blue"
                        routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/3/{{widget['_id']}}"></a>
                   </div>
-                  <iframe class="video-frame" [style.width]="widget['width'] + '%'" [src]="getSanitizedURL(widget['url'])" frameborder="0" allowfullscreen></iframe>
+                  <!--<iframe class="video-frame" [src]="getSanitizedURL(widget['url'])" frameborder="0" allowfullscreen></iframe>-->
+
                 </div>
               </li>
             </div>
