@@ -5,7 +5,6 @@
 import {Routes, RouterModule} from '@angular/router';
 import {HomeComponent} from './components/home/home.component';
 import {ModuleWithProviders} from '@angular/core';
-import {TestComponent} from './components/test/test.component';
 import { LoginComponent } from './components/user/login/login.component';
 import { ProfileComponent } from './components/user/profile/profile.component';
 import { RegisterComponent } from './components/user/register/register.component';
@@ -18,6 +17,7 @@ import { PageEditComponent } from './components/page/page-edit/page-edit.compone
 import { WidgetListComponent } from './components/widget/widget-list/widget-list.component';
 import { WidgetChooserComponent } from './components/widget/widget-chooser/widget-chooser.component';
 import { WidgetEditComponent } from './components/widget/widget-edit/widget-edit.component';
+import { ImgSearchFlickrComponent } from './components/widget/widget-edit/widget-image/img-search-flickr/img-search-flickr.component';
 
 
 
@@ -37,8 +37,8 @@ const APP_ROUTES: Routes = [
   {path: 'user/:uid/website/:wid/page/:pid/widget/new', component : WidgetChooserComponent},
   {path: 'user/:uid/website/:wid/page/:pid/widget/:wtype', component : WidgetEditComponent},
   {path: 'user/:uid/website/:wid/page/:pid/widget/:wtype/:wgid', component : WidgetEditComponent},
-  {path: 'test', component: TestComponent}
-];
+  {path: 'user/:uid/website/:wid/page/:pid/widget/:wtype/:wgid/flickr', component : ImgSearchFlickrComponent}
+  ];
 
 // Export the routes as module providers
 export const Routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);

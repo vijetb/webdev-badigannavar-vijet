@@ -1,0 +1,28 @@
+<!--Header-->
+<nav class="navbar navbar-default navbar-fixed-top widget-navbar-header">
+  <div class="container-fluid">
+
+    <p class="navbar-text pull-left">
+      <a (click)="goBack()" class="glyphicon glyphicon-chevron-left"></a>
+    </p>
+
+    <a class="navbar-brand"><b>Search Image</b></a>
+
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="input-group">
+    <input ng-model="searchText" [(ngModel)]="searchText" type="text" placeholder="Search Images" class="form-control">
+    <span class="input-group-btn">
+        <a (click)="fetchImages()"  class="btn btn-primary form-control" >
+            <span class="glyphicon glyphicon-search"></span>
+        </a>
+        </span>
+  </div>
+  <div class="row">
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 small-padding" *ngFor="let i of images">
+        <img (click)="captureImage(i)" src="https://farm{{i.farm}}.staticflickr.com/{{i.server}}/{{i.id}}_{{i.secret}}_s.jpg"/>
+    </div>
+  </div>
+</div>

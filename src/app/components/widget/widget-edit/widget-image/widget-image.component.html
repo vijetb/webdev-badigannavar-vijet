@@ -49,6 +49,10 @@
 
   </form>
   <div class="form-group">
+    <button *ngIf="!isNewWidget" routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/2/{{widgetId}}/flickr" class="btn btn-block btn-success">Search Image</button>
+    <button *ngIf="isNewWidget" routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/2/new/flickr" class="btn btn-block btn-success">Search Image</button>
+  </div>
+  <div class="form-group">
     <button (click)="deleteWidget()" class="btn btn-block btn-danger">Delete</button>
   </div>
 </div>

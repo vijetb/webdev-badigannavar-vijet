@@ -3,11 +3,10 @@ import { Directive, ElementRef, NgModule, Renderer2 } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-import { TestComponent } from './components/test/test.component';
 import {Routing} from './app.routing';
 import {HttpModule} from '@angular/http';
 import {FormsModule} from '@angular/forms';
-import {TestService} from './services/test.service.client';
+import { FlickrService} from './services/flickr.service.client';
 import { LoginComponent } from './components/user/login/login.component';
 import { UserService } from './services/user.service.client';
 import { ProfileComponent } from './components/user/profile/profile.component';
@@ -31,13 +30,13 @@ import { WidgetChooserComponent } from './components/widget/widget-chooser/widge
 import { SortableDirective } from './directives/sortable.directive';
 import { QuillEditorModule } from 'ngx-quill-editor';
 import { WidgetTextComponent } from './components/widget/widget-edit/widget-text/widget-text.component';
+import { ImgSearchFlickrComponent } from './components/widget/widget-edit/widget-image/img-search-flickr/img-search-flickr.component';
 
 @NgModule({
   // Declare components here
   declarations: [
     AppComponent,
     HomeComponent,
-    TestComponent,
     LoginComponent,
     ProfileComponent,
     RegisterComponent,
@@ -55,7 +54,8 @@ import { WidgetTextComponent } from './components/widget/widget-edit/widget-text
     WidgetHtmlComponent,
     WidgetChooserComponent,
     SortableDirective,
-    WidgetTextComponent
+    WidgetTextComponent,
+    ImgSearchFlickrComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +64,7 @@ import { WidgetTextComponent } from './components/widget/widget-edit/widget-text
     Routing,
     QuillEditorModule],
   // Client Side services here
-  providers: [TestService, UserService, WebsiteService, PageService, WidgetService],
+  providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
