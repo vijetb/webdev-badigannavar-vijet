@@ -10,6 +10,8 @@ module.exports = function(app, model) {
 
   app.post('/api/register', register);
   app.post('/api/login', passport.authenticate('local'), login);
+  app.post('/api/logout', logout);
+  app.post('/api/loggedIn', loggedIn);
 
   passport.serializeUser(serializeUser);
   passport.deserializeUser(deserializeUser);
@@ -33,6 +35,14 @@ module.exports = function(app, model) {
       );
   }
 
+  function loggedIn(req, res) {
+    if(req.isAuthenticated()) {
+      res.json(req.user);
+    } else {
+      res.json({u: 0});
+    }
+  }
+
   function register(req, res) {
     var user = req.body;
     model.userModel
@@ -47,6 +57,11 @@ module.exports = function(app, model) {
 
   function login(req, res) {
     res.json(req.user);
+  }
+
+  function logout(req, res) {
+    req.logOut();
+    res.send(200);
   }
 
   function createUser(req, res) {

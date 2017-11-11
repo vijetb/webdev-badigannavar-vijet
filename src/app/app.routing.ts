@@ -18,6 +18,7 @@ import { WidgetListComponent } from './components/widget/widget-list/widget-list
 import { WidgetChooserComponent } from './components/widget/widget-chooser/widget-chooser.component';
 import { WidgetEditComponent } from './components/widget/widget-edit/widget-edit.component';
 import { ImgSearchFlickrComponent } from './components/widget/widget-edit/widget-image/img-search-flickr/img-search-flickr.component';
+import { AuthenticationService } from './services/authentication-service.service.client';
 
 
 
@@ -26,7 +27,7 @@ const APP_ROUTES: Routes = [
   {path: 'login', component : LoginComponent},
   {path: 'logout', component : LoginComponent},
   {path: 'register', component : RegisterComponent},
-  {path: 'profile', component : ProfileComponent},
+  {path: 'profile', component : ProfileComponent, canActivate: [AuthenticationService]},
   {path: 'user/:uid', component : ProfileComponent},
   {path: 'user/:uid/website', component : WebsiteListComponent},
   {path: 'user/:uid/website/new', component : WebsiteNewComponent},

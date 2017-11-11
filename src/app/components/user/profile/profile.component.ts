@@ -32,7 +32,11 @@ export class ProfileComponent implements OnInit {
   }
 
   logout() {
-      this.router.navigate(['/logout']);
+    this.userService.logout()
+      .subscribe((status) => {
+      // console.log(status);
+        this.router.navigate(['/login']);
+      });
   }
 
   updateUserInfo(user: User) {
