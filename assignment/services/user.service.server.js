@@ -1,10 +1,53 @@
 module.exports = function(app, model) {
 
+  var passport  = require('passport');
+
   app.post('/api/user', createUser);
   app.get('/api/user', findUser);
   app.get('/api/user/:userId', findUserById);
   app.put('/api/user/:userId', updateUser);
   app.delete('/api/user/:userId', deleteUser);
+
+  app.post('/api/register', register);
+  app.post('/api/login', passport.authenticate('local'), login);
+
+  passport.serializeUser(serializeUser);
+  passport.deserializeUser(deserializeUser);
+  var LocalStrategy = require('passport-local').Strategy;
+  passport.use(new LocalStrategy(localStrategy));
+
+  function serializeUser(user, done) {
+    done(null, user);
+  }
+
+  function deserializeUser(user, done) {
+    model.userModel
+      .findUserById(user._id)
+      .then(
+        function(user){
+          done(null, user);
+        },
+        function(err){
+          done(err, null);
+        }
+      );
+  }
+
+  function register(req, res) {
+    var user = req.body;
+    model.userModel
+      .createUser(user)
+      .then(function(user){
+        res.json(user);
+        // req.login(user, function(err) {
+        //   res.json(user);
+        // });
+      });
+  }
+
+  function login(req, res) {
+    res.json(req.user);
+  }
 
   function createUser(req, res) {
     var user = req.body;
@@ -87,5 +130,35 @@ module.exports = function(app, model) {
       }, function (err) {
         res.json(null);
       });
+  }
+
+
+
+
+  function localStrategy(user, pass, done) {
+
+    model.userModel.findUserByUsername(user)
+      .then(function (u) {
+        if(u && u.username === user && u.password === pass ){
+          return done(null, u);
+        }else{
+          return done(null, false);
+        }
+      }, function (err) {
+        return done(null, false);
+      });
+
+    // userModel
+    //   .findUserByCredentials(usr, pass)
+    //   .then(
+    //     function(user) {
+    //       if(user.username === usrn && user.password === pass) {
+    //         return done(null, user);
+    //       } else {
+    //         return done(null, false);
+    //       }
+    //     }
+    //   );
+
   }
 }

@@ -1,6 +1,6 @@
 import { User } from '../model/user.model.client';
 import { Injectable } from '@angular/core';
-import {Http, Response} from '@angular/http';
+import { Http, RequestOptions, Response } from '@angular/http';
 import 'rxjs/Rx';
 import {environment} from '../../environments/environment';
 
@@ -10,6 +10,34 @@ export class UserService {
   constructor(private http: Http) {}
 
   baseUrl = environment.baseUrl;
+
+  options: RequestOptions = new RequestOptions();
+
+  register(username, password) {
+    const credentials = {
+      username: username,
+      password: password
+    };
+    this.options.withCredentials = true;
+    return this.http.post(this.baseUrl + '/api/register', credentials, this.options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  login(username, password) {
+    const credentials = {
+      username: username,
+      password: password
+    };
+    this.options.withCredentials = true;
+    return this.http.post(this.baseUrl + '/api/login', credentials, this.options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+
   createUser(user: User) {
     const u = {
       username: user.username,

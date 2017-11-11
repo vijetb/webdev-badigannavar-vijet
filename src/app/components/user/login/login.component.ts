@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service.client';
 import { User } from '../../../model/user.model.client';
 import { NgForm } from '@angular/forms';
+import { SharedService } from '../../../services/shared-service.service.client';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
   username: String;
   password: String;
   loginError: String;
-  constructor(private router: Router, private userService: UserService) { }
+  constructor(private router: Router, private sharedService: SharedService, private userService: UserService) { }
 
   ngOnInit() {}
 
@@ -24,15 +25,25 @@ export class LoginComponent implements OnInit {
     this.loginError = null;
     this.username = this.loginForm.value.username;
     this.password = this.loginForm.value.password;
-    this.userService.findUserByCredentials(this.username, this.password)
-       .subscribe((user) =>  {
-      console.log(user);
-         if (user) {
-           this.router.navigate(['/user', user._id]);
-         }else {
-           this.loginError = 'Invalid Username/ Password. Try again...';
-         }
-    });
+    this.userService
+      .login(this.username, this.password)
+      .subscribe((user) => {
+        this.sharedService.user = user;
+        console.log(user);
+        this.router.navigate(['/profile']);
+      });
+
+
+    // this.userService.findUserByCredentials(this.username, this.password)
+    //    .subscribe((user) =>  {
+    //   console.log(user);
+    //      if (user) {
+    //        this.router.navigate(['/user', user._id]);
+    //      }else {
+    //        this.loginError = 'Invalid Username/ Password. Try again...';
+    //      }
+    // });
+
   }
 
 }

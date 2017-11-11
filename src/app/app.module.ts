@@ -31,6 +31,7 @@ import { SortableDirective } from './directives/sortable.directive';
 import { QuillEditorModule } from 'ngx-quill-editor';
 import { WidgetTextComponent } from './components/widget/widget-edit/widget-text/widget-text.component';
 import { ImgSearchFlickrComponent } from './components/widget/widget-edit/widget-image/img-search-flickr/img-search-flickr.component';
+import { SharedService } from './services/shared-service.service.client';
 
 @NgModule({
   // Declare components here
@@ -64,7 +65,7 @@ import { ImgSearchFlickrComponent } from './components/widget/widget-edit/widget
     Routing,
     QuillEditorModule],
   // Client Side services here
-  providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService],
+  providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService, SharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
