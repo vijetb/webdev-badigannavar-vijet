@@ -49,7 +49,7 @@ module.exports = function(app, model) {
       .createUser(user)
       .then(function(user){
         res.json(user);
-        // req.login(user, function(err) {
+        // req.login(user , function(err) {
         //   res.json(user);
         // });
       });
