@@ -13,10 +13,63 @@ module.exports = function(app, model) {
   app.post('/api/logout', logout);
   app.post('/api/loggedIn', loggedIn);
 
+
   passport.serializeUser(serializeUser);
   passport.deserializeUser(deserializeUser);
   var LocalStrategy = require('passport-local').Strategy;
   passport.use(new LocalStrategy(localStrategy));
+
+  var FacebookStrategy = require('passport-facebook').Strategy;
+
+  app.get ('/facebook/login', passport.authenticate('facebook', { scope : 'email' }));
+
+  var facebookConfig = {
+    clientID     : '347274155738098',
+    clientSecret : '03a9e81052235bc7a815badd6dfe5228',
+    callbackURL  : '/auth/facebook/callback'
+  };
+
+  passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+
+  app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+      successRedirect: '/profile',
+      failureRedirect: '/login'
+    }));
+
+
+  function facebookStrategy(token, refreshToken, profile, done) {
+    model.userModel
+      .findUserByFacebookId(profile.id)
+      .then(
+        function(user) {
+          if(user) {
+            return done(null, user);
+          } else {
+            console.log(profile);
+            var names = profile.displayName.split(" ");
+            var newFacebookUser = {
+              username: profile.id,
+              lastName:  names[1],
+              firstName: names[0],
+              email: profile.emails ? profile.emails[0].value:'',
+              facebook: {
+                id:    profile.id,
+                token: token
+              }
+            };
+
+            model.userModel.createUser(newFacebookUser)
+              .then(function (user) {
+                return done(null, user);
+              });
+          }
+        },
+        function(err) {
+          if (err) { return done(err); }
+        }
+      );
+  }
 
   function serializeUser(user, done) {
     done(null, user);
@@ -147,11 +200,7 @@ module.exports = function(app, model) {
       });
   }
 
-
-
-
   function localStrategy(user, pass, done) {
-
     model.userModel.findUserByUsername(user)
       .then(function (u) {
         if(u && u.username === user && u.password === pass ){
@@ -162,18 +211,5 @@ module.exports = function(app, model) {
       }, function (err) {
         return done(null, false);
       });
-
-    // userModel
-    //   .findUserByCredentials(usr, pass)
-    //   .then(
-    //     function(user) {
-    //       if(user.username === usrn && user.password === pass) {
-    //         return done(null, user);
-    //       } else {
-    //         return done(null, false);
-    //       }
-    //     }
-    //   );
-
   }
 }

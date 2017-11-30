@@ -27,6 +27,7 @@ export class ProfileComponent implements OnInit {
         //       this.user = user;
         //     }
         // });
+        console.log(this.sharedService.user);
         this.user = this.sharedService.user;
     });
   }
