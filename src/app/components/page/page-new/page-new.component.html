@@ -43,11 +43,15 @@
     </div>
 
     <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 pull-right">
-      <div *ngIf="errorMsg" class="alert alert-danger" role="alert">{{errorMsg}}</div>
       <form>
+        <div *ngIf="(pName.invalid && (pName.dirty || pName.touched)) || errorMsg"
+             class="alert alert-danger">
+          Page Name cannot be empty!
+        </div>
+
         <div class="form-group">
           <label for="pageName">Name</label>
-          <input type="text" class="form-control" name="pageName" id="pageName" placeholder="Page Name" [(ngModel)]="pageName">
+          <input type="text" class="form-control" ngModel required #pName="ngModel" name="pName" id="pageName" placeholder="Page Name" [(ngModel)]="pageName">
         </div>
       </form>
       <form>

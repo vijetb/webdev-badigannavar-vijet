@@ -45,14 +45,17 @@
       </ul>
     </div>
     <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 pull-right">
-      <div *ngIf="errorMsg" class="alert alert-danger" role="alert">{{errorMsg}}</div>
       <form>
+        <div *ngIf="(wName.invalid && (wName.dirty || wName.touched)) || errorMsg"
+             class="alert alert-danger">
+          Website Name cannot be empty!
+        </div>
         <div class="form-group">
           <label for="websiteName">Website Name</label>
           <input type="text"
                  class="form-control"
+                 #wName="ngModel" ngModel required name = "wName"
                  id="websiteName"
-                 name="websiteName"
                  placeholder="Alice"
                  value="{{updatedName}}"
                  [(ngModel)]="updatedName"

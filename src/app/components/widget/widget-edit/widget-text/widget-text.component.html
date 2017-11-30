@@ -21,7 +21,11 @@
   <form>
     <div class="form-group">
       <label for="widgetName">Name</label>
-      <input type="text" class="form-control" name="widgetName" id="widgetName" placeholder="Alice" [(ngModel)]="name">
+      <input type="text" class="form-control" #textName = "ngModel" ngModel required name="textName" id="widgetName" placeholder="Alice" [(ngModel)]="name">
+    </div>
+    <div *ngIf="(textName.invalid && (textName.dirty || textName.touched))"
+         class="alert alert-danger">
+      Text Name cannot be empty!
     </div>
     <div class="form-group">
       <label for="widgetText">Text</label>
