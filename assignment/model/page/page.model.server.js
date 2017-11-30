@@ -44,14 +44,5 @@ function reorderWidgetsWithinPage(pageId, startPos, endPos) {
         page.widgets = pageWidgets;
         return page.save();
       });
-
-    // , function(err, page) {
-    //   var pageWidgets = page.widgets;
-    //   pageWidgets.splice(endPos, 0, pageWidgets.splice(startPos, 1)[0]);
-    //   page.widgets = pageWidgets;
-    //   page.save(function(err, page) {
-    //     deferred.resolve(page);
-    //   });
-    // });
 }
 

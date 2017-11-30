@@ -1,6 +1,3 @@
-/**
- * Created by sesha on 7/26/17.
- */
 
 import {Routes, RouterModule} from '@angular/router';
 import {HomeComponent} from './components/home/home.component';
@@ -19,8 +16,6 @@ import { WidgetChooserComponent } from './components/widget/widget-chooser/widge
 import { WidgetEditComponent } from './components/widget/widget-edit/widget-edit.component';
 import { ImgSearchFlickrComponent } from './components/widget/widget-edit/widget-image/img-search-flickr/img-search-flickr.component';
 import { AuthenticationService } from './services/authentication-service.service.client';
-
-
 
 const APP_ROUTES: Routes = [
   {path: '', component : LoginComponent},
@@ -44,12 +39,3 @@ const APP_ROUTES: Routes = [
 
 // Export the routes as module providers
 export const Routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
-//
-// user/:uid/website/new						WebsiteNewComponent
-// user/:uid/website/:wid						WebsiteEditComponent
-// user/:uid/website/:wid/page					PageListComponent
-// user/:uid/website/:wid/page/new				PageNewComponent
-// user/:uid/website/:wid/page/:pid				PageEditComponent
-// user/:uid/website/:wid/page/:pid/widget			WidgetListComponent
-// user/:uid/website/:wid/page/:pid/widget/new		WidgetChooserComponent
-// user/:uid/website/:wid/page/:pid/widget/:wgid		WidgetEditComponent

@@ -27,7 +27,6 @@ export class ProfileComponent implements OnInit {
         //       this.user = user;
         //     }
         // });
-        console.log(this.sharedService.user);
         this.user = this.sharedService.user;
     });
   }
@@ -35,7 +34,6 @@ export class ProfileComponent implements OnInit {
   logout() {
     this.userService.logout()
       .subscribe((status) => {
-      // console.log(status);
         this.router.navigate(['/login']);
       });
   }

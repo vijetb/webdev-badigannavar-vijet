@@ -40,13 +40,7 @@ export class WidgetListComponent implements OnInit {
 
   myFunc(event: Object) {
     this.widgetService.updateWidgetPosition(this.pageId, event['startIndex'], event['endIndex'])
-        .subscribe((data) => {
-            if (data && data.success === true) {
-              console.log('success');
-            }else {
-              console.log('error in updating position');
-            }
-        });
+        .subscribe((data) => {});
   }
 
 }

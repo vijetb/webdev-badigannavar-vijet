@@ -38,9 +38,7 @@ export class WebsiteNewComponent implements OnInit {
     this.newWebsite =  new Website(null, this.websiteName, this.userId, this.websiteDesc);
     this.websiteService.createWebsite(this.userId, this.newWebsite)
       .subscribe((data) => {
-
-      console.log(data);
-          if (data) {
+         if (data) {
             this.websiteList.push(data);
             this.websiteName = null;
             this.websiteDesc = null;

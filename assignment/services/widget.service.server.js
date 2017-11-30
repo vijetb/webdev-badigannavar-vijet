@@ -51,13 +51,10 @@ module.exports = function(app, model) {
   function createWidget(req, res) {
     pageId = req.params['pageId'];
     widget = req.body;
-
-    console.log(widget);
     model.widgetModel.createWidget(widget)
       .then(function (wid) {
         res.json(widget);
       }, function (err) {
-        console.log(err);
         res.json(null);
       })
   }
@@ -97,10 +94,8 @@ module.exports = function(app, model) {
   function deleteWidget(req, res) {
     widgetId = req.params['widgetId'];
     pageId = req.params['pageId'];
-    console.log(req.body);
     model.widgetModel.deleteWidget(pageId, widgetId)
       .then(function (status) {
-        console.log(status);
         res.json({})
       }, function (err) {
         res.json(null);

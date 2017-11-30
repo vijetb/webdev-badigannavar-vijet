@@ -57,7 +57,6 @@ export class WidgetYoutubeComponent implements OnInit {
   }
 
   updateWidget() {
-    console.log(this.width);
     if (this.url === undefined || this.url === '') {
       this.errorMsg = 'Url cannot be empty';
       return;

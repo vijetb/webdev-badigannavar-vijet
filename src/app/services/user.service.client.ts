@@ -51,12 +51,7 @@ export class UserService {
     this.options.withCredentials = true;
     return this.http.post(this.baseUrl + '/api/loggedIn', '', this.options)
       .map((res: Response) => {
-
-        // console.log('----');
-        // console.log(res);
         const user = res.json();
-        console.log(user);
-        // console.log('----');
         if (user.u === 0) {
           this.router.navigate(['/login']);
           return false;

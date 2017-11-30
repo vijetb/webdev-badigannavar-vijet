@@ -25,12 +25,6 @@ export class ImgSearchFlickrComponent implements OnInit {
       this.websiteId = params['wid'];
       this.pageId = params['pid'];
       this.widgetId = params['wgid'];
-
-      console.log(this.userId);
-      console.log(this.websiteId);
-      console.log(this.pageId);
-      console.log(this.widgetId);
-
     });
   }
 
@@ -43,7 +37,6 @@ export class ImgSearchFlickrComponent implements OnInit {
   }
 
   fetchImages() {
-    console.log(this.searchText);
     this.flickrService.getImages(this.searchText).subscribe((res) => {
       let data = res.replace('jsonFlickrApi(', '');
       data = data.substring(0, data.length - 1);
@@ -56,7 +49,6 @@ export class ImgSearchFlickrComponent implements OnInit {
     if (this.widgetId === 'new') {
       const widget =  {'widgetType': 'IMAGE', 'pageId': this.pageId,
         'url': 'https://farm' +  i.farm + '.staticflickr.com/' + i.server + '/' + i.id + '_' + i.secret + '_b.jpg', 'width': 100};
-      console.log(widget.url);
       this.widgetService.createWidget(this.pageId, widget)
         .subscribe((data) => {
           this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
