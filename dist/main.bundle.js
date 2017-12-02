@@ -771,7 +771,7 @@ var ProfileComponent = (function () {
         var _this = this;
         this.userService.logout()
             .subscribe(function (status) {
-            _this.router.navigate(['/login']);
+            _this.router.navigate(['/']);
         });
     };
     ProfileComponent.prototype.updateUserInfo = function (user) {
