@@ -30,7 +30,10 @@ export class LoginComponent implements OnInit {
       .subscribe((user) => {
         this.sharedService.user = user;
         this.router.navigate(['/profile']);
-      });
+      }, (err) => {
+          this.loginError = 'Invalid Username or Password';
+        }
+        );
   }
 
 }

@@ -5,6 +5,7 @@ import 'rxjs/Rx';
 import {environment} from '../../environments/environment';
 import { SharedService } from './shared-service.service.client';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class UserService {
@@ -24,6 +25,11 @@ export class UserService {
     return this.http.post(this.baseUrl + '/api/register', credentials, this.options)
       .map((response: Response) => {
         return response.json();
+      })
+      .catch(e => {
+        if (e.status === 401) {
+          return Observable.throw('Unauthorized');
+        }
       });
   }
 

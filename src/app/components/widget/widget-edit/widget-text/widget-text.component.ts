@@ -61,7 +61,11 @@ export class WidgetTextComponent implements OnInit {
     if (this.rows === undefined || isNaN(this.rows)) {
       this.errorMsg = 'No of rows should be an integer';
       return;
+    }else if (this.name === undefined || this.name === '') {
+      this.errorMsg = 'Text cannot be empty';
+      return;
     }
+
     const numRows = Number(this.rows);
     if (this.isNewWidget) {
 

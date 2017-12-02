@@ -22,7 +22,6 @@ export class SortableDirective implements AfterViewInit {
 
   appSortable(refe) {
     const self = this;
-    console.log('under sortable');
     jQuery(this.el.nativeElement).sortable({
       axis: 'y',
       start: function (event, ui) {

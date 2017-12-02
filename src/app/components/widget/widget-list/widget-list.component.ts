@@ -29,7 +29,6 @@ export class WidgetListComponent implements OnInit {
       .subscribe( (data) => {
           if (data) {
             this.widgetList = data;
-            console.log(this.widgetList);
           }
       });
   }

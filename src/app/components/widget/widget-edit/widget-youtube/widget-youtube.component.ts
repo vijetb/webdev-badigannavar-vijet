@@ -60,6 +60,9 @@ export class WidgetYoutubeComponent implements OnInit {
     if (this.url === undefined || this.url === '') {
       this.errorMsg = 'Url cannot be empty';
       return;
+    }else if (this.name === undefined || this.name === '') {
+      this.errorMsg = 'Name cannot be empty';
+      return;
     }else if (this.width === undefined || isNaN(this.width)) {
       this.errorMsg = 'width cannot be empty or it should be a number without (%)';
       return;
