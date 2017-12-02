@@ -25,9 +25,9 @@ module.exports = function(app, model) {
   app.get ('/facebook/login', passport.authenticate('facebook', { scope : 'email' }));
 
   var facebookConfig = {
-    clientID     : process.env.FACEBOOK_CLIENT_ID,
-    clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-    callbackURL  : process.env.FACEBOOK_CALLBACK_URL
+    clientID     : '347274155738098',
+    clientSecret : '03a9e81052235bc7a815badd6dfe5228',
+    callbackURL  : '/auth/facebook/callback'
   };
 
   passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));

@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 //TODO: Use env to set up this secret
-app.use(session({ secret: process.env.SESSION_SECRET }));
+app.use(session({ secret: 'something-secret' }));
 app.use(passport.initialize());
 app.use(passport.session());
 
